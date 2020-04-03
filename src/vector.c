@@ -1,7 +1,7 @@
 #include <math.h>
 #include "vector.h"
 
-#define M_PI   3.14159265358979323846264338327950288
+#define PI   3.14159265358979323846264338327950288
 
 vector vector_sum(vector v1, vector v2)
 {
