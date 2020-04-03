@@ -1,7 +1,7 @@
 #include <math.h>
 #include "vector.h"
 
-#define PI   3.14159265358979323846264338327950288
+#define PI 3.14159265358979323846264338327950288
 
 vector vector_sum(vector v1, vector v2)
 {
@@ -33,7 +33,7 @@ vector vector_div(vector v, double d)
 }
 double vector_get_arg(vector *v)
 {
-    return atan2(v->x, v->y)* (180.0 / M_PI);
+    return atan2(v->x, v->y)* (180.0 / PI);
 }
 double vector_get_module(vector *v)
 {
@@ -41,7 +41,7 @@ double vector_get_module(vector *v)
 }
 vector vector_set_arg(vector v, double arg)
 {
-    arg = arg / (180.0 / M_PI);
+    arg = arg / (180.0 / PI);
     vector output;
     double module = vector_get_module(&v);
     output.y = sin(arg) * module;
