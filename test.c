@@ -3,9 +3,10 @@
 #include "vector.h"
 #include <stdio.h>
 
+/* These tests need improvements! */
+
 int main()
 {
-
     printf("---> Single line tests.\n");
     {
         line l1;

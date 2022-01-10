@@ -2,27 +2,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-line line_new_from_segment(segment s)
+line line_new_from_segment(segment * s)
 {
     line l1 = {};
-    if (s.p2.y == s.p1.y && s.p2.x == s.p1.x)
+    if (s->p2.y == s->p1.y && s->p2.x == s->p1.x)
     {
         l1.type = LINE_TYPE_NULL;
     }
-    else if (s.p1.x == s.p2.x)
+    else if (s->p1.x == s->p2.x)
     {
         l1.type = LINE_TYPE_VERT;
     }
-    else if (s.p1.y == s.p2.y)
+    else if (s->p1.y == s->p2.y)
     {
         l1.type = LINE_TYPE_HORIZON;
-        l1.a = s.p1.y;
+        l1.a = s->p1.y;
     }
     else
     {
         l1.type = LINE_TYPE_LIN;
-        l1.a = (s.p1.y - s.p2.y) / (s.p1.x - s.p2.x);
-        l1.b = ((s.p2.x * s.p1.y) - (s.p1.x * s.p2.y)) / (s.p2.x - s.p1.x);
+        l1.a = (s->p1.y - s->p2.y) / (s->p1.x - s->p2.x);
+        l1.b = ((s->p2.x * s->p1.y) - (s->p1.x * s->p2.y)) / (s->p2.x - s->p1.x);
     }
     return l1;
 }
@@ -120,6 +120,11 @@ void line_print(line *l)
 int line_intersect(line *l1, line *l2, vector *intersection)
 {
     /*
+        This is some kind of simple brute force :p
+        H means horizontal line,
+        V means vertical line,
+        L mieans linear, kinda non constant line.
+
         Truth table:
         ==
         HH
@@ -181,7 +186,7 @@ int line_intersect(line *l1, line *l2, vector *intersection)
 
 
 
-    
+
     /* VH */
      if (vert != NULL && horiz != NULL)
     {
