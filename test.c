@@ -47,22 +47,22 @@ int main()
         assert(res.x == 0);
         assert(res.y == 1);
         l1 = line_new_vert(2);
-        assert(line_intersect(&l1, &l2, &res));
-        assert(line_intersect(&l2, &l1, &res));
+        assert(line_intersect(&l1, &l2, &res) == LINE_INTERSECT_POINT);
+        assert(line_intersect(&l2, &l1, &res) == LINE_INTERSECT_POINT);
         assert(res.y == -1);
         assert(res.x == 2);
         l2 = line_new_horiz(2);
-        assert(line_intersect(&l1, &l2, &res));
-        assert(line_intersect(&l2, &l1, &res));
+        assert(line_intersect(&l1, &l2, &res) == LINE_INTERSECT_POINT);
+        assert(line_intersect(&l2, &l1, &res) == LINE_INTERSECT_POINT);
         assert(res.y == 2);
         assert(res.x == 2);
         l2 = line_new_vert(3);
-        assert(line_intersect(&l1, &l2, &res) == 0);
-        assert(line_intersect(&l2, &l1, &res) == 0);
+        assert(line_intersect(&l1, &l2, &res) == LINE_INTERSECT_NOT);
+        assert(line_intersect(&l2, &l1, &res) == LINE_INTERSECT_NOT);
         /* Infinite intersection. */
         l2 = line_new_vert(2);
-        assert(line_intersect(&l1, &l2, &res) == -1);
-        assert(line_intersect(&l2, &l1, &res) == -1);
+        assert(line_intersect(&l1, &l2, &res) == LINE_INTERSECT_INF);
+        assert(line_intersect(&l2, &l1, &res) == LINE_INTERSECT_INF);
     }
 
     return 0;

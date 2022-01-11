@@ -10,6 +10,10 @@
 #define LINE_TYPE_HORIZON 3
 #define LINE_TYPE_NULL 4
 
+#define LINE_INTERSECT_NOT 0
+#define LINE_INTERSECT_POINT 1
+#define LINE_INTERSECT_INF -1
+
 typedef struct line line;
 struct line
 {
@@ -24,6 +28,7 @@ line line_new_horiz(double y);
 int line_calc_from_x(double *output, line *l, double x);
 int line_calc_from_y(double *output, line *l, double y);
 void line_print(line *l);
+/* Return LINE_INTERSECT_INF or LINE_INTERSECT_POINT or LINE_INTERSECT_NOT */
 int line_intersect(line *l1, line *l2, vector *intersection);
 
 #endif
