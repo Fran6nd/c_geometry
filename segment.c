@@ -1,5 +1,6 @@
 #include "segment.h"
 #include "line.h"
+#include <stdio.h>
 segment segment_new(vector p1, vector p2)
 {
     segment s = {
@@ -35,39 +36,37 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
             return SEGMENT_INTERSECT_IS_POINT;
             break;
         case LINE_INTERSECT_INF:
+
         {
             vector contained[2];
             int index = 0;
-            if (segment_contain_point(s1, &s2->p1))
+            if (segment_contain_point(s2, &s1->p1))
             {
                 contained[index] = s2->p1;
                 index++;
             }
-            if (segment_contain_point(s1, &s2->p2))
+            if (segment_contain_point(s2, &s1->p2))
             {
                 contained[index] = s2->p2;
                 index++;
             }
-            if (segment_contain_point(s1, &s2->p1))
+            if (segment_contain_point(s1, &s2->p1) && index < 2)
             {
                 contained[index] = s2->p1;
                 index++;
             }
-            if (segment_contain_point(s2, &s1->p1) && index < 2)
+            if (segment_contain_point(s1, &s2->p2) && index < 2)
             {
                 contained[index] = s1->p1;
                 index++;
             }
-            if (segment_contain_point(s2, &s1->p2) && index < 2)
-            {
-                contained[index] = s1->p2;
-                index++;
-            }
+
             si->seg.p1 = contained[0];
-            si->seg.p1 = contained[1];
-            return SEGMENT_INTERSECT_IS_SEGMENT;
+            si->seg.p2 = contained[1];
         }
-        break;
+
+            return SEGMENT_INTERSECT_IS_SEGMENT;
+            break;
 
         default:
             break;
