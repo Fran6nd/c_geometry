@@ -64,6 +64,26 @@ int main()
         assert(line_intersect(&l1, &l2, &res) == LINE_INTERSECT_INF);
         assert(line_intersect(&l2, &l1, &res) == LINE_INTERSECT_INF);
     }
+    printf("---> Line containing point tests.\n");
+    {
+        vector v = vector_new(5, 6);
+        line l1 = line_new(1, 1);
+        assert(line_contain_point(&l1,&v) == 1);
+        l1 = line_new_vert(5);
+        assert(line_contain_point(&l1,&v) == 1);
+        l1 = line_new_horiz(6);
+        assert(line_contain_point(&l1,&v) == 1);
+        l1 = line_new(1, 2);
+        assert(line_contain_point(&l1,&v) == 0);
+        l1 = line_new_vert(7);
+        assert(line_contain_point(&l1,&v) == 0);
+        l1 = line_new_horiz(4);
+        assert(line_contain_point(&l1,&v) == 0);
+
+    }
+    printf("---> Intersecting segments tests.\n");
+    {
+    }
 
     return 0;
 }

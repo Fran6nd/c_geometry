@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-line line_new_from_segment(segment * s)
+line line_new_from_segment(segment *s)
 {
     line l1 = {};
     if (s->p2.y == s->p1.y && s->p2.x == s->p1.x)
@@ -160,35 +160,36 @@ int line_intersect(line *l1, line *l2, vector *intersection)
         return LINE_INTERSECT_POINT;
     }
 
-
-
-    line * vert = NULL;
-    line*horiz = NULL;
-    line * lin = NULL;
-    if(l1->type == LINE_TYPE_VERT){
+    line *vert = NULL;
+    line *horiz = NULL;
+    line *lin = NULL;
+    if (l1->type == LINE_TYPE_VERT)
+    {
         vert = l1;
     }
-    else if(l2->type == LINE_TYPE_VERT){
+    else if (l2->type == LINE_TYPE_VERT)
+    {
         vert = l2;
     }
-    if(l1->type == LINE_TYPE_HORIZON){
+    if (l1->type == LINE_TYPE_HORIZON)
+    {
         horiz = l1;
     }
-    else if(l2->type == LINE_TYPE_HORIZON){
+    else if (l2->type == LINE_TYPE_HORIZON)
+    {
         horiz = l2;
     }
-    if(l1->type == LINE_TYPE_LIN){
+    if (l1->type == LINE_TYPE_LIN)
+    {
         lin = l1;
     }
-    else if(l2->type == LINE_TYPE_LIN){
+    else if (l2->type == LINE_TYPE_LIN)
+    {
         lin = l2;
     }
 
-
-
-
     /* VH */
-     if (vert != NULL && horiz != NULL)
+    if (vert != NULL && horiz != NULL)
     {
         intersection->x = vert->b;
         intersection->y = horiz->b;
@@ -212,4 +213,34 @@ int line_intersect(line *l1, line *l2, vector *intersection)
 
     return LINE_INTERSECT_NOT;
 }
-// y = ax+b
+int line_contain_point(line *l, vector *p)
+{
+    double res;
+    switch (l->type)
+    {
+    case LINE_TYPE_LIN:
+        if (line_calc_from_x(&res, l, p->x) == 0)
+            if (res == p->y)
+            {
+                return 1;
+            }
+        break;
+    case LINE_TYPE_VERT:
+        if (p->x == l->b)
+        {
+            return 1;
+        }
+        break;
+    case LINE_TYPE_HORIZON:
+        if (p->y == l->b)
+        {
+            return 1;
+        }
+        break;
+
+    default:
+        /* Error */
+        break;
+    }
+    return 0;
+}
