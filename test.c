@@ -68,21 +68,44 @@ int main()
     {
         vector v = vector_new(5, 6);
         line l1 = line_new(1, 1);
-        assert(line_contain_point(&l1,&v) == 1);
+        assert(line_contain_point(&l1, &v) == 1);
         l1 = line_new_vert(5);
-        assert(line_contain_point(&l1,&v) == 1);
+        assert(line_contain_point(&l1, &v) == 1);
         l1 = line_new_horiz(6);
-        assert(line_contain_point(&l1,&v) == 1);
+        assert(line_contain_point(&l1, &v) == 1);
         l1 = line_new(1, 2);
-        assert(line_contain_point(&l1,&v) == 0);
+        assert(line_contain_point(&l1, &v) == 0);
         l1 = line_new_vert(7);
-        assert(line_contain_point(&l1,&v) == 0);
+        assert(line_contain_point(&l1, &v) == 0);
         l1 = line_new_horiz(4);
-        assert(line_contain_point(&l1,&v) == 0);
-
+        assert(line_contain_point(&l1, &v) == 0);
     }
-    printf("---> Intersecting segments tests.\n");
+    printf("---> Segment containing point tests.\n");
     {
+        /* Diagonal segment. */
+        segment s = segment_new(vector_new(1, 1), vector_new(2, 2));
+        vector p = vector_new(1.5, 1.5);
+        assert(segment_contain_point(&s, &p) == 1);
+        p = vector_new(1, 1.5);
+        assert(segment_contain_point(&s, &p) == 0);
+        p = vector_new(10, 10);
+        assert(segment_contain_point(&s, &p) == 0);
+        /* horizontal segment. */
+        s = segment_new(vector_new(0, 0), vector_new(0, 2));
+        p = vector_new(0, 1);
+        assert(segment_contain_point(&s, &p) == 1);
+        p = vector_new(0, 3);
+        assert(segment_contain_point(&s, &p) == 0);
+        p = vector_new(0, 0);
+        assert(segment_contain_point(&s, &p) == 1);
+        /* Vertical segment. */
+        s = segment_new(vector_new(0, 0), vector_new(2, 0));
+        p = vector_new(1, 0);
+        assert(segment_contain_point(&s, &p) == 1);
+        p = vector_new(3, 0);
+        assert(segment_contain_point(&s, &p) == 0);
+        p = vector_new(0, 0);
+        assert(segment_contain_point(&s, &p) == 1);
     }
 
     return 0;
