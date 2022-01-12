@@ -16,12 +16,13 @@ void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
     {
         for (int y1 = -radius; y1 <= radius; y1++)
         {
-            if(x1 == -radius || y1 == -radius || x1 == radius || y1 == radius){
-                
+            if (x1 == -radius || y1 == -radius || x1 == radius || y1 == radius)
+            {
+
                 struct vector v = vector_new(x1, y1);
                 v = vector_normalize(v);
                 v = vector_mul(v, radius);
-                SDL_RenderDrawPoint(renderer, (int) v.x + x,(int) v.y + y);
+                SDL_RenderDrawPoint(renderer, (int)v.x + x, (int)v.y + y);
             }
         }
     }
@@ -53,24 +54,23 @@ int main()
 
     vector center = vector_new(320, 240);
     segment seg[] = {
-       // {.p1.x = 5, .p1.y = 5, .p2.x = center.x, .p2.y = 5},
+        {.p1.x = 5, .p1.y = 5, .p2.x = center.x, .p2.y = 5},
         {.p1.x = 5, .p1.y = 5, .p2.x = center.x, .p2.y = 25},
-        /*{.p1.x = 25, .p1.y = 25, .p2.x = 25, .p2.y = 300},
+        {.p1.x = 25, .p1.y = 25, .p2.x = 25, .p2.y = 300},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 350},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 400},
         {.p1.x = 60, .p1.y = center.y, .p2.x = 500, .p2.y = center.y},
         {.p1.x = center.x, .p1.y = 20, .p2.x = center.x, .p2.y = 60},
-        {.p1.x = center.x +100, .p1.y = center.y+100, .p2.x = center.x + 200, .p2.y = center.y+200},
-*/
+        {.p1.x = center.x + 100, .p1.y = center.y + 100, .p2.x = center.x + 200, .p2.y = center.y + 200},
+
     };
-    double theta = 90;
+    double theta = 25;
     vector vct = vector_new(0, 1000);
     int paused = 0;
     while (1)
     {
         if (!paused)
             theta += 0.1;
-        
         //theta = 45;
         vct = vector_set_arg(vct, theta);
         // Break out of the loop on quit
@@ -80,23 +80,37 @@ int main()
         SEGMENT_DRAW(SEGMENT_FROM_VECT(center, vct));
         //VECTOR_DRAW(center, vector_new(25, 25));
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
-        for(int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++){
+        for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
+        {
             SEGMENT_DRAW(seg[i]);
         }
-        for(int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++){
+        for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
+        {
             segment s = SEGMENT_FROM_VECT(center, vct);
             segment_intersection si;
             int type = segment_intersect(&s, &seg[i], &si);
-            if(type == SEGMENT_INTERSECT_IS_POINT){
+            //printf("%d\n", type);
+            if (type == SEGMENT_INTERSECT_IS_POINT)
+            {
                 draw_circle(renderer, VECTOR_TO_INT(si.pt), 5);
             }
-            else if(type == SEGMENT_INTERSECT_IS_SEGMENT){
+            else if (type == SEGMENT_INTERSECT_IS_SEGMENT)
+            {
                 //o\n");
-                draw_circle(renderer, VECTOR_TO_INT(si.seg.p1), 5);
-                draw_circle(renderer, VECTOR_TO_INT(si.seg.p2), 5);
+                //if (segment_contain_point(&s, &si.seg.p1))
+                {
+                  //  printf("%d %d\n", VECTOR_TO_INT(si.seg.p1));
+                    draw_circle(renderer, VECTOR_TO_INT(si.seg.p1), 5);
+                }
+                //if (segment_contain_point(&s, &si.seg.p2))
+                {
+                   // printf("%d %d\n", VECTOR_TO_INT(si.seg.p2));
+                    draw_circle(renderer, VECTOR_TO_INT(si.seg.p2), 5);
+                }
+
             }
-            else{
-             
+            else
+            {
             }
         }
         SDL_RenderPresent(renderer);
@@ -108,9 +122,10 @@ int main()
             {
 
                 break;
-            }else if(event.type == SDL_KEYDOWN)
+            }
+            else if (event.type == SDL_KEYDOWN)
             {
-                paused = ! paused;
+                paused = !paused;
             }
         }
     }

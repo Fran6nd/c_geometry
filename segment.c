@@ -27,7 +27,7 @@ int segment_contain_point(segment *s1, vector *p)
     #define B s1->p2
     #define C (*p)
 
-    if(((int)((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y))/2 * 100)) == 0)
+    if(((int)((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y))/2 * ACCURACY)) == 0)
     {
         if (p->x >= fmin(s1->p1.x, s1->p2.x) && p->x <= fmax(s1->p1.x, s1->p2.x) && p->y >= fmin(s1->p1.y, s1->p2.y) && p->y <= fmax(s1->p1.y, s1->p2.y))
         //if ((p->x <= s1->p1.x && p->x >= s1->p2.x) || (p->x >= s1->p1.x && p->x <= s1->p2.x))
@@ -61,12 +61,12 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
             int index = 0;
             if (segment_contain_point(s2, &s1->p1))
             {
-                contained[index] = s2->p1;
+                contained[index] = s1->p1;
                 index++;
             }
             if (segment_contain_point(s2, &s1->p2))
             {
-                contained[index] = s2->p2;
+                contained[index] = s1->p2;
                 index++;
             }
             if (segment_contain_point(s1, &s2->p1) && index < 2)
