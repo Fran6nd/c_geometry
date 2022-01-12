@@ -160,6 +160,7 @@ int line_intersect(line *l1, line *l2, vector *intersection)
         // x = (d-b)/(a-c)
         intersection->x = (l2->b - l1->b) / (l1->a - l2->a);
         line_calc_from_x(&intersection->y, l1, intersection->x);
+        
         return LINE_INTERSECT_POINT;
     }
 

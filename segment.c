@@ -13,7 +13,19 @@ int segment_contain_point(segment *s1, vector *p)
 {
     line l1 = line_new_from_segment(s1);
     double res;
-    if (line_contain_point(&l1, p))
+    /*
+        The 3 points are aligned if the area of the triangle is 0
+        [ Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By) ] / 2 == 0
+        Why I do multiply the area by 100 and convert it to int? Because with too many decimals it causes bugs.
+        Then we will check that the point fit into the segment's rect.
+    */
+
+   /* This is ugly. */
+    #define A s1->p1
+    #define B s1->p2
+    #define C (*p)
+
+    if(((int)((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y))/2 * 100)) == 0)
     {
         if ((p->x <= s1->p1.x && p->x >= s1->p2.x) || (p->x >= s1->p1.x && p->x <= s1->p2.x))
             if ((p->y <= s1->p1.y && p->y >= s1->p2.y) || (p->y >= s1->p1.y && p->y <= s1->p2.y))

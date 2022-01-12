@@ -58,6 +58,8 @@ int main()
         {.p1.x = 25, .p1.y = 25, .p2.x = 25, .p2.y = 300},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 350},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 400},
+        {.p1.x = 60, .p1.y = center.y, .p2.x = 500, .p2.y = center.y},
+        {.p1.x = center.x, .p1.y = 400, .p2.x = center.x, .p2.y = 400},
 
     };
     printf("->%d\n", sizeof(seg) / sizeof(seg[0]));
