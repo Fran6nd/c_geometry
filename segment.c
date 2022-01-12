@@ -1,6 +1,7 @@
 #include "segment.h"
 #include "line.h"
 #include <stdio.h>
+#include "common.h"
 segment segment_new(vector p1, vector p2)
 {
     segment s = {
@@ -74,7 +75,7 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
             }
             if (segment_contain_point(s1, &s2->p2) && index < 2)
             {
-                contained[index] = s1->p1;
+                contained[index] = s2->p2;
                 index++;
             }
 

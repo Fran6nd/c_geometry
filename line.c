@@ -1,6 +1,8 @@
 #include "line.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "common.h"
+#include <math.h>
 
 line line_new_from_segment(segment *s)
 {
@@ -105,7 +107,7 @@ void line_print(line *l)
 {
     if (l->type == LINE_TYPE_LIN)
     {
-        printf("Line: y = %f * x + %f\n", l->b, l->b);
+        printf("Line: y = %f * x + %f   type:%d\n", l->a, l->b, (int)l->type);
     }
     else if (l->type == LINE_TYPE_VERT)
     {
@@ -139,7 +141,7 @@ int line_intersect(line *l1, line *l2, vector *intersection)
     */
 
     /* == */
-    if (l1->type == l2->type && l1->a == l2->a && l1->b == l2->b)
+    if (l1->type == l2->type && ALMOST_EQ(l1->a, l2->a ) && ALMOST_EQ(l1->b,l2->b))
     {
         /* Same line. Infinite intersection. */
         return LINE_INTERSECT_INF;
@@ -217,6 +219,7 @@ int line_intersect(line *l1, line *l2, vector *intersection)
 
     return LINE_INTERSECT_NOT;
 }
+/* Should be fixed by the methods of the air of the triangle == 0 */
 int line_contain_point(line *l, vector *p)
 {
     double res;
