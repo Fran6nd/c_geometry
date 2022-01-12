@@ -2,6 +2,7 @@
 #include "line.h"
 #include "vector.h"
 #include "segment.h"
+#include "triangle.h"
 #include <stdio.h>
 
 /* These tests need improvements! */
@@ -119,10 +120,17 @@ int main()
         assert(si.pt.y == 0);
         s2 = segment_new(vector_new(-1, 1), vector_new(1, -1));
         assert(segment_intersect(&s1, &s2, &si) == SEGMENT_INTERSECT_IS_SEGMENT);
-        assert(si.seg.p1.x == s1.p1.x || si.seg.p1.x == s1.p2.x|| si.seg.p1.x == s2.p2.x|| si.seg.p1.x == s2.p2.x);
-        assert(si.seg.p1.y == s1.p1.y || si.seg.p1.y == s1.p2.y|| si.seg.p1.y == s2.p2.y|| si.seg.p1.y == s2.p2.y);
-        assert(si.seg.p2.x == s1.p1.x || si.seg.p2.x == s1.p2.x|| si.seg.p2.x == s2.p1.x|| si.seg.p2.x == s2.p2.x);
-        assert(si.seg.p2.y == s1.p1.y || si.seg.p2.y == s1.p2.y|| si.seg.p2.y == s2.p1.y|| si.seg.p2.y == s2.p2.y);
+        assert(si.seg.p1.x == s1.p1.x || si.seg.p1.x == s1.p2.x || si.seg.p1.x == s2.p2.x || si.seg.p1.x == s2.p2.x);
+        assert(si.seg.p1.y == s1.p1.y || si.seg.p1.y == s1.p2.y || si.seg.p1.y == s2.p2.y || si.seg.p1.y == s2.p2.y);
+        assert(si.seg.p2.x == s1.p1.x || si.seg.p2.x == s1.p2.x || si.seg.p2.x == s2.p1.x || si.seg.p2.x == s2.p2.x);
+        assert(si.seg.p2.y == s1.p1.y || si.seg.p2.y == s1.p2.y || si.seg.p2.y == s2.p1.y || si.seg.p2.y == s2.p2.y);
+    }
+    printf("---> Triangle tests.\n");
+    {
+        triangle t1 = triangle_new(vector_new(0,0),vector_new(1,1),vector_new(2,0));
+        FOREACH_SEGMENT_IN_TRIANGLE(&t1, gogo){
+           printf("%f\n", gogo.p1.x);
+        }
     }
 
     return 0;

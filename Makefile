@@ -5,7 +5,7 @@ ifeq ($(UNAME), Darwin)
 endif
 
 test:
-	gcc test.c -o tmp-test line.c vector.c segment.c
+	gcc test.c -o tmp-test line.c vector.c segment.c triangle.c
 	./tmp-test
 	rm tmp-test
 demo:
