@@ -13,3 +13,7 @@ For now it shows how we can perform raycasts and other things with the lib.
 * Make more demos.
 * Get angle between segs/lines if intersections.
 * Use triangles to create a polygon object by intersecting triangles.
+
+## Questions
+Feel free to answer :)
+* Is it better to include the intersection type into the instersection struct or to return it?
