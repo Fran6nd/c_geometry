@@ -2,6 +2,7 @@
 #include "line.h"
 #include <stdio.h>
 #include "common.h"
+#include <math.h>
 segment segment_new(vector p1, vector p2)
 {
     segment s = {
@@ -28,7 +29,8 @@ int segment_contain_point(segment *s1, vector *p)
 
     if(((int)((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y))/2 * 100)) == 0)
     {
-        if ((p->x <= s1->p1.x && p->x >= s1->p2.x) || (p->x >= s1->p1.x && p->x <= s1->p2.x))
+        if (p->x >= fmin(s1->p1.x, s1->p2.x) && p->x <= fmax(s1->p1.x, s1->p2.x) && p->y >= fmin(s1->p1.y, s1->p2.y) && p->y <= fmax(s1->p1.y, s1->p2.y))
+        //if ((p->x <= s1->p1.x && p->x >= s1->p2.x) || (p->x >= s1->p1.x && p->x <= s1->p2.x))
             if ((p->y <= s1->p1.y && p->y >= s1->p2.y) || (p->y >= s1->p1.y && p->y <= s1->p2.y))
                 return 1;
     }
@@ -55,7 +57,6 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
         case LINE_INTERSECT_INF:
 
         {
-            printf("ho\n");
             vector contained[2];
             int index = 0;
             if (segment_contain_point(s2, &s1->p1))

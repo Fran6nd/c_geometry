@@ -53,15 +53,15 @@ int main()
 
     vector center = vector_new(320, 240);
     segment seg[] = {
-      /*  {.p1.x = 5, .p1.y = 5, .p2.x = center.x, .p2.y = 5},
+       // {.p1.x = 5, .p1.y = 5, .p2.x = center.x, .p2.y = 5},
         {.p1.x = 5, .p1.y = 5, .p2.x = center.x, .p2.y = 25},
-        {.p1.x = 25, .p1.y = 25, .p2.x = 25, .p2.y = 300},
+        /*{.p1.x = 25, .p1.y = 25, .p2.x = 25, .p2.y = 300},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 350},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 400},
         {.p1.x = 60, .p1.y = center.y, .p2.x = 500, .p2.y = center.y},
         {.p1.x = center.x, .p1.y = 20, .p2.x = center.x, .p2.y = 60},
-        */{.p1.x = center.x +100, .p1.y = center.y+100, .p2.x = center.x + 200, .p2.y = center.y+200},
-
+        {.p1.x = center.x +100, .p1.y = center.y+100, .p2.x = center.x + 200, .p2.y = center.y+200},
+*/
     };
     double theta = 90;
     vector vct = vector_new(0, 1000);
@@ -71,7 +71,7 @@ int main()
         if (!paused)
             theta += 0.1;
         
-        theta = 45;
+        //theta = 45;
         vct = vector_set_arg(vct, theta);
         // Break out of the loop on quit
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
