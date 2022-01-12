@@ -63,9 +63,11 @@ int main()
     printf("->%d\n", sizeof(seg) / sizeof(seg[0]));
     double theta = 90;
     vector vct = vector_new(0, 1000);
+    int paused = 0;
     while (1)
     {
-        theta += 0.1;
+        if (!paused)
+            theta += 0.1;
         //theta = 90;
         vct = vector_set_arg(vct, theta);
         // Break out of the loop on quit
@@ -95,6 +97,9 @@ int main()
             {
 
                 break;
+            }else if(event.type == SDL_KEYDOWN)
+            {
+                paused = ! paused;
             }
         }
     }
