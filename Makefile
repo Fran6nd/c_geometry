@@ -9,6 +9,6 @@ test:
 	./tmp-test
 	rm tmp-test
 demo:
-	gcc demo.c -o tmp-demo line.c vector.c segment.c  $(SDL2_INCLUDE)
-	./tmp-demo
-	rm tmp-demo
+	gcc demo.c -o tmp-demo-line line.c vector.c segment.c  $(SDL2_INCLUDE)
+	./tmp-demo-line
+	rm tmp-demo-line
