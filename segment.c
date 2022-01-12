@@ -32,8 +32,12 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
         switch (res)
         {
         case LINE_INTERSECT_POINT:
-            si->pt = intersection;
-            return SEGMENT_INTERSECT_IS_POINT;
+            if (segment_contain_point(s1, &intersection) && segment_contain_point(s2, &intersection))
+            {
+                si->pt = intersection;
+                return SEGMENT_INTERSECT_IS_POINT;
+                
+            }
             break;
         case LINE_INTERSECT_INF:
 

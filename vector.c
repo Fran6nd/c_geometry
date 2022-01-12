@@ -42,6 +42,7 @@ double vector_get_module(vector *v)
 {
     return sqrt(pow(v->x, 2) + pow(v->y, 2));
 }
+/* arg is given in degrees. */
 vector vector_set_arg(vector v, double arg)
 {
     arg = arg / (180.0 / PI);

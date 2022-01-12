@@ -12,11 +12,14 @@ line line_new_from_segment(segment *s)
     else if (s->p1.x == s->p2.x)
     {
         l1.type = LINE_TYPE_VERT;
+        l1.a = -1;
+        l1.b = s->p1.x;
     }
     else if (s->p1.y == s->p2.y)
     {
         l1.type = LINE_TYPE_HORIZON;
-        l1.a = s->p1.y;
+        l1.a = -1;
+        l1.b = s->p1.y;
     }
     else
     {
