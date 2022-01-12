@@ -8,7 +8,7 @@ There is a demo based on the SDL2 lib. Run `make demo` to try it out.
 <br>
 For now it shows how we can perform raycasts and other things with the lib.
 <br>
-##TO DO
+## #TODO
 * Improve tests :)
 * Make more demos.
 * Get angle between segs/lines if intersections.
