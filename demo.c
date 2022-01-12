@@ -59,10 +59,10 @@ int main()
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 350},
         {.p1.x = 60, .p1.y = 400, .p2.x = 500, .p2.y = 400},
         {.p1.x = 60, .p1.y = center.y, .p2.x = 500, .p2.y = center.y},
-        {.p1.x = center.x, .p1.y = 400, .p2.x = center.x, .p2.y = 400},
+        {.p1.x = center.x, .p1.y = 20, .p2.x = center.x, .p2.y = 60},
+        {.p1.x = center.x +100, .p1.y = center.y+100, .p2.x = center.x + 200, .p2.y = center.y+200},
 
     };
-    printf("->%d\n", sizeof(seg) / sizeof(seg[0]));
     double theta = 90;
     vector vct = vector_new(0, 1000);
     int paused = 0;
@@ -70,7 +70,8 @@ int main()
     {
         if (!paused)
             theta += 0.1;
-        //theta = 90;
+        
+        theta = 45;
         vct = vector_set_arg(vct, theta);
         // Break out of the loop on quit
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -88,6 +89,11 @@ int main()
             int type = segment_intersect(&s, &seg[i], &si);
             if(type == SEGMENT_INTERSECT_IS_POINT){
                 draw_circle(renderer, VECTOR_TO_INT(si.pt), 5);
+            }
+            else if(type == SEGMENT_INTERSECT_IS_SEGMENT){
+                printf("yoo\n");
+                draw_circle(renderer, VECTOR_TO_INT(si.seg.p1), 5);
+                draw_circle(renderer, VECTOR_TO_INT(si.seg.p2), 5);
             }
         }
         SDL_RenderPresent(renderer);

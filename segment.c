@@ -54,6 +54,7 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
         case LINE_INTERSECT_INF:
 
         {
+            printf("ho\n");
             vector contained[2];
             int index = 0;
             if (segment_contain_point(s2, &s1->p1))
