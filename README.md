@@ -17,3 +17,4 @@ For now it shows how we can perform raycasts and other things with the lib.
 ## Questions
 Feel free to answer :)
 * Is it better to include the intersection type into the instersection struct or to return it?
+* I want to make triangles interoperables with segments... Maybe using vector[] instead of struct for both could do the trick?
