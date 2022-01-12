@@ -2,7 +2,7 @@
 
 It's a simple library, work in progress, made to help about 2d geomtries.
 <br>
-The idea is to help managing lines, segments, triangles, intersections, collisions...
+The idea is to help managing lines, segments, triangles, intersections, collisions... The final goal is to help the making of 2D games by helping about collision detection, raycasting...
 <br>
 There is a demo based on the SDL2 lib. Run `make demo` to try it out.
 <br>
