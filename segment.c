@@ -58,9 +58,6 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
         switch (res)
         {
         case LINE_INTERSECT_POINT:
-            printf("tyc %d\n", segment_contain_point(s1, &intersection));
-            printf("x%f y%f x%f y%f\n", s1->p1.x, s1->p1.y, s1->p2.x, s1->p2.y);
-            printf("%f %f\n", intersection.x, intersection.y);
             if (segment_contain_point(s1, &intersection) && segment_contain_point(s2, &intersection))
             {
                 si->pt = intersection;

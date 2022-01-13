@@ -80,7 +80,7 @@ int main()
             //sleep(1);
         }
 
-        theta = 10;
+        theta = 90;
         vct = vector_set_arg(vct, theta);
         // Break out of the loop on quit
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -98,7 +98,7 @@ int main()
             segment s = SEGMENT_FROM_VECT(center, vct);
             segment_intersection si;
             int type = segment_intersect(&s, &seg[i], &si);
-    
+            //printf("%d\n", type);
             if (type == SEGMENT_INTERSECT_IS_POINT)
             {
                 draw_circle(renderer, VECTOR_TO_INT(si.pt), 5);
