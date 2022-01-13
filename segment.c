@@ -11,9 +11,9 @@ segment segment_new(vector p1, vector p2)
     };
     return s;
 }
-int segment_contain_point(segment *s1, vector *p)
+int segment_contain_point(segment *s, vector *p)
 {
-    line l1 = line_new_from_segment(s1);
+    line l1 = line_new_from_segment(s);
     double res;
     /*
         The 3 points are aligned if the area of the triangle is 0
@@ -22,18 +22,29 @@ int segment_contain_point(segment *s1, vector *p)
         Then we will check that the point fit into the segment's rect.
     */
 
-   /* This is ugly. */
-    #define A s1->p1
-    #define B s1->p2
-    #define C (*p)
+    /* This is ugly. */
+#define A s->p1
+#define B s->p2
+#define C (*p)
 
-    if(((int)((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y))/2 * ACCURACY)) == 0)
+    if (((int)((A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y)) / 2 * ACCURACY)) == 0)
     {
-        if (p->x >= fmin(s1->p1.x, s1->p2.x) && p->x <= fmax(s1->p1.x, s1->p2.x) && p->y >= fmin(s1->p1.y, s1->p2.y) && p->y <= fmax(s1->p1.y, s1->p2.y))
-        //if ((p->x <= s1->p1.x && p->x >= s1->p2.x) || (p->x >= s1->p1.x && p->x <= s1->p2.x))
-            if ((p->y <= s1->p1.y && p->y >= s1->p2.y) || (p->y >= s1->p1.y && p->y <= s1->p2.y))
+        if ((p->x >= fmin(s->p1.x, s->p2.x)) && (p->x <= fmax(s->p1.x, s->p2.x)) && (p->y >= fmin(s->p1.y, s->p2.y)) && (p->y <= fmax(s->p1.y, s->p2.y)))
+        {
+            return 1;
+        }
+        /* I don't know yet why I need this... The case where the point is at an ending of the segment. */
+        else if (ALMOST_EQ(p->x, s->p1.x) || ALMOST_EQ(p->x, s->p2.x))
+        {
+            if (ALMOST_EQ(p->y, s->p1.y) || ALMOST_EQ(p->y, s->p2.y))
+            {
                 return 1;
+            }
+        }
     }
+#undef A
+#undef B
+#undef C
     return 0;
 }
 int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
@@ -47,11 +58,13 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
         switch (res)
         {
         case LINE_INTERSECT_POINT:
+            printf("tyc %d\n", segment_contain_point(s1, &intersection));
+            printf("x%f y%f x%f y%f\n", s1->p1.x, s1->p1.y, s1->p2.x, s1->p2.y);
+            printf("%f %f\n", intersection.x, intersection.y);
             if (segment_contain_point(s1, &intersection) && segment_contain_point(s2, &intersection))
             {
                 si->pt = intersection;
                 return SEGMENT_INTERSECT_IS_POINT;
-                
             }
             break;
         case LINE_INTERSECT_INF:
