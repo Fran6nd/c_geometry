@@ -77,10 +77,10 @@ int main()
         if (!paused)
         {
             theta += 5;
-            //sleep(1);
+            sleep(1);
         }
 
-        theta = 90;
+        //theta = 90;
         vct = vector_set_arg(vct, theta);
         // Break out of the loop on quit
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
