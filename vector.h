@@ -1,12 +1,10 @@
 #ifndef VECTOR_h
 #define VECTOR_h
 
-typedef struct vector vector;
-
-struct vector
+typedef struct
 {
     double x, y;
-};
+} vector;
 
 vector vector_new(double x, double y);
 vector vector_sum(vector v1, vector v2);
@@ -17,8 +15,8 @@ double vector_get_arg(vector *v);
 double vector_get_module(vector *v);
 vector vector_set_arg(vector v, double arg);
 vector vector_normalize(vector v);
-void vector_increment(vector * v1, vector v2);
-void vector_decrement(vector * v1, vector* v2);
+void vector_increment(vector *v1, vector v2);
+void vector_decrement(vector *v1, vector *v2);
 vector vector_zero();
 
 #endif
