@@ -14,12 +14,11 @@
 #define LINE_INTERSECT_POINT 1
 #define LINE_INTERSECT_INF -1
 
-typedef struct line line;
-struct line
+typedef struct
 {
     double a, b;
     char type;
-};
+} line;
 
 line line_new_from_segment(segment *s);
 line line_new(double a, double b);
@@ -31,6 +30,6 @@ void line_print(line *l);
 /* Return LINE_INTERSECT_INF or LINE_INTERSECT_POINT or LINE_INTERSECT_NOT */
 int line_intersect(line *l1, line *l2, vector *intersection);
 /* Return 1 if p is on l else 0. */
-int line_contain_point(line * l, vector * p);
+int line_contain_point(line *l, vector *p);
 
 #endif
