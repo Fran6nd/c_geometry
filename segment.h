@@ -14,20 +14,7 @@
 /* Means that the intersection is a segment itself. */
 #define SEGMENT_INTERSECT_IS_SEGMENT -1
 
-typedef struct segment segment;
-struct segment
-{
-    vector p1, p2;
-};
-typedef struct segment_intersection
-{
-    union
-    {
-        vector pt;
-        segment seg;
-    };
-
-} segment_intersection;
+#include "structs.h"
 
 segment segment_new(vector p1, vector p2);
 int segment_contain_point(segment *s1, vector *p);

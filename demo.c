@@ -3,6 +3,7 @@
 #include "vector.h"
 #include "line.h"
 #include "segment.h"
+#include "structs.h"
 #ifdef _WIN32
 #include <Windows.h>
 #else
@@ -24,7 +25,7 @@ void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
             if (x1 == -radius || y1 == -radius || x1 == radius || y1 == radius)
             {
 
-                struct vector v = vector_new(x1, y1);
+                vector v = vector_new(x1, y1);
                 v = vector_normalize(v);
                 v = vector_mul(v, radius);
                 SDL_RenderDrawPoint(renderer, (int)v.x + x, (int)v.y + y);

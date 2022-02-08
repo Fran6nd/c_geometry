@@ -14,11 +14,7 @@
 #define LINE_INTERSECT_POINT 1
 #define LINE_INTERSECT_INF -1
 
-typedef struct
-{
-    double a, b;
-    char type;
-} line;
+#include "structs.h"
 
 line line_new_from_segment(segment *s);
 line line_new(double a, double b);

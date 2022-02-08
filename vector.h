@@ -1,10 +1,7 @@
 #ifndef VECTOR_h
 #define VECTOR_h
 
-typedef struct
-{
-    double x, y;
-} vector;
+#include "structs.h"
 
 vector vector_new(double x, double y);
 vector vector_sum(vector v1, vector v2);

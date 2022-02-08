@@ -3,7 +3,7 @@
 
 #define PI 3.14159265358979323846264338327950288
 vector vector_new(double x, double y){
-    struct vector v = {.x = x, .y = y};
+    vector v = {.x = x, .y = y};
     return v;
 }
 vector vector_sum(vector v1, vector v2)
