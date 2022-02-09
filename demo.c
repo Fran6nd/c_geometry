@@ -97,12 +97,12 @@ int main()
         for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
         {
             segment s = SEGMENT_FROM_VECT(center, vct);
-            segment_intersection si;
+            intersection si;
             int type = segment_intersect(&s, &seg[i], &si);
             //printf("%d\n", type);
             if (type == INTERSECTION_POINT)
             {
-                draw_circle(renderer, VECTOR_TO_INT(si.pt), 5);
+                draw_circle(renderer, VECTOR_TO_INT(si.p), 5);
             }
             else if (type == INTERSECTION_SEGMENT)
             {
@@ -110,12 +110,12 @@ int main()
                 //if (segment_contain_point(&s, &si.seg.p1))
                 {
                   //  printf("%d %d\n", VECTOR_TO_INT(si.seg.p1));
-                    draw_circle(renderer, VECTOR_TO_INT(si.seg.p1), 5);
+                    draw_circle(renderer, VECTOR_TO_INT(si.s.p1), 5);
                 }
                 //if (segment_contain_point(&s, &si.seg.p2))
                 {
                    // printf("%d %d\n", VECTOR_TO_INT(si.seg.p2));
-                    draw_circle(renderer, VECTOR_TO_INT(si.seg.p2), 5);
+                    draw_circle(renderer, VECTOR_TO_INT(si.s.p2), 5);
                 }
 
             }

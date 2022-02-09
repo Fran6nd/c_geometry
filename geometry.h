@@ -36,16 +36,6 @@ typedef struct
     vector p1, p2;
 } segment;
 
-typedef struct
-{
-    union
-    {
-        vector pt;
-        segment seg;
-    };
-
-} segment_intersection;
-
 typedef struct {
     char type;
     union{
@@ -53,6 +43,6 @@ typedef struct {
         segment s;
         line l;
     };
-} intesection;
+} intersection;
 
 #endif

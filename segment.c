@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include "common.h"
 #include <math.h>
+#include "geometry.h"
+
 segment segment_new(vector p1, vector p2)
 {
     segment s = {
@@ -47,7 +49,7 @@ int segment_contain_point(segment *s, vector *p)
 #undef C
     return 0;
 }
-int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
+int segment_intersect(segment *s1, segment *s2, intersection *si)
 {
 
     line l1 = line_new_from_segment(s1);
@@ -61,7 +63,7 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
         case INTERSECTION_POINT:
             if (segment_contain_point(s1, &intersection) && segment_contain_point(s2, &intersection))
             {
-                si->pt = intersection;
+                si->p = intersection;
                 return INTERSECTION_POINT;
             }
             break;
@@ -91,8 +93,8 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
             }
             if (index == 2)
             {
-                si->seg.p1 = contained[0];
-                si->seg.p2 = contained[1];
+                si->s.p1 = contained[0];
+                si->s.p2 = contained[1];
                 return INTERSECTION_SEGMENT;
             }
         }
