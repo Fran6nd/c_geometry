@@ -123,8 +123,9 @@ void line_print(line *l)
     }
 }
 
-int line_intersect(line *l1, line *l2, vector *intersection)
+intersection line_intersect(line *l1, line *l2)
 {
+    intersection output;
     /*
         This is some kind of simple brute force :p
         H means horizontal line,
@@ -145,26 +146,29 @@ int line_intersect(line *l1, line *l2, vector *intersection)
     if (l1->type == l2->type && ALMOST_EQ(l1->a, l2->a ) && ALMOST_EQ(l1->b,l2->b))
     {
         /* Same line. Infinite intersection. */
-        return INTERSECTION_LINE;
+        output.type = INTERSECTION_LINE;
+        return output;
     }
     /* HH */
     if (l1->type == LINE_TYPE_HORIZON && l2->type == LINE_TYPE_HORIZON)
     {
-        return INTERSECTION_LINE;
+        output.type = INTERSECTION_LINE;
+        return output;
     }
     /* VV */
     else if (l1->type == LINE_TYPE_VERT && l2->type == LINE_TYPE_VERT)
     {
-        return INTERSECTION_NONE;
+        output.type = INTERSECTION_NONE;
+        return output;
     }
     /* LL */
     else if (l1->type == LINE_TYPE_LIN && l2->type == LINE_TYPE_LIN)
     {
         // x = (d-b)/(a-c)
-        intersection->x = (l2->b - l1->b) / (l1->a - l2->a);
-        line_calc_from_x(&intersection->y, l1, intersection->x);
-        
-        return INTERSECTION_POINT;
+        output.p.x = (l2->b - l1->b) / (l1->a - l2->a);
+        line_calc_from_x(&output.p.y, l1, output.p.x);
+        output.type = INTERSECTION_POINT;
+        return output;
     }
 
     line *vert = NULL;
@@ -198,27 +202,31 @@ int line_intersect(line *l1, line *l2, vector *intersection)
     /* VH */
     if (vert != NULL && horiz != NULL)
     {
-        intersection->x = vert->b;
-        intersection->y = horiz->b;
-        return INTERSECTION_POINT;
+        output.p.x = vert->b;
+        output.p.y = horiz->b;
+        output.type = INTERSECTION_POINT;
+        return output;
     }
     /* VL */
     else if (vert != NULL && lin != NULL)
     {
 
-        intersection->x = vert->b;
-        line_calc_from_x(&intersection->y, lin, intersection->x);
-        return INTERSECTION_POINT;
+        output.p.x = vert->b;
+        line_calc_from_x(&output.p.y, lin, output.p.x);
+        output.type = INTERSECTION_POINT;
+        return output;
     }
     /* HL */
     else if (horiz != NULL && lin != NULL)
     {
-        intersection->y = horiz->b;
-        line_calc_from_y(&intersection->x, lin, intersection->y);
-        return INTERSECTION_POINT;
+        output.p.y = horiz->b;
+        line_calc_from_y(&output.p.x, lin, output.p.y);
+        output.type = INTERSECTION_POINT;
+        return output;
     }
 
-    return INTERSECTION_NONE;
+        output.type = INTERSECTION_NONE;
+        return output;
 }
 /* Should be fixed by the methods of the air of the triangle == 0 */
 int line_contain_point(line *l, vector *p)
