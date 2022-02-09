@@ -11,7 +11,7 @@ For now it shows how we can perform raycasts and other things with the lib.
 ## #TODO
 * Improve tests :)
 * Make more demos. We need demos of triangles capabilities and when it will work, we need a demo of ray reflecting on surfaces.
-* Add triangles into `structs.h`
+* Add triangles into `geometry.h`
 * Get angle between segs/lines if intersections.
 * Use triangles to create a polygon object by intersecting triangles.
 * Add a `ray` struct defines by a `vector` as origin and a `float` "theta" or another `vector` as a direction.

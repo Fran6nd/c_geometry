@@ -1,11 +1,6 @@
 #ifndef geometry_h
 #define geometry_h
 
-#define LINE_TYPE_LIN 0
-#define LINE_TYPE_VERT 1
-#define LINE_TYPE_HORIZON 3
-#define LINE_TYPE_NULL 4
-
 #define INTERSECTION_POINT 1
 #define INTERSECTION_NONE 0
 /* Means that the intersection is a segment itself. */
