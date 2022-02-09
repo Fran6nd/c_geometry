@@ -100,11 +100,11 @@ int main()
             segment_intersection si;
             int type = segment_intersect(&s, &seg[i], &si);
             //printf("%d\n", type);
-            if (type == SEGMENT_INTERSECT_IS_POINT)
+            if (type == INTERSECTION_POINT)
             {
                 draw_circle(renderer, VECTOR_TO_INT(si.pt), 5);
             }
-            else if (type == SEGMENT_INTERSECT_IS_SEGMENT)
+            else if (type == INTERSECTION_SEGMENT)
             {
                 //o\n");
                 //if (segment_contain_point(&s, &si.seg.p1))

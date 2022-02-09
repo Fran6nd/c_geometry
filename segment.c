@@ -54,18 +54,18 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
     line l2 = line_new_from_segment(s2);
     vector intersection;
     int res = line_intersect(&l1, &l2, &intersection);
-    if (res != LINE_INTERSECT_NOT)
+    if (res != INTERSECTION_NONE)
     {
         switch (res)
         {
-        case LINE_INTERSECT_POINT:
+        case INTERSECTION_POINT:
             if (segment_contain_point(s1, &intersection) && segment_contain_point(s2, &intersection))
             {
                 si->pt = intersection;
-                return SEGMENT_INTERSECT_IS_POINT;
+                return INTERSECTION_POINT;
             }
             break;
-        case LINE_INTERSECT_INF:
+        case INTERSECTION_LINE:
         {
             vector contained[2];
             int index = 0;
@@ -93,7 +93,7 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
             {
                 si->seg.p1 = contained[0];
                 si->seg.p2 = contained[1];
-                return SEGMENT_INTERSECT_IS_SEGMENT;
+                return INTERSECTION_SEGMENT;
             }
         }
 
@@ -103,5 +103,5 @@ int segment_intersect(segment *s1, segment *s2, segment_intersection *si)
             break;
         }
     }
-    return SEGMENT_INTERSECT_IS_NONE;
+    return INTERSECTION_NONE;
 }

@@ -145,17 +145,17 @@ int line_intersect(line *l1, line *l2, vector *intersection)
     if (l1->type == l2->type && ALMOST_EQ(l1->a, l2->a ) && ALMOST_EQ(l1->b,l2->b))
     {
         /* Same line. Infinite intersection. */
-        return LINE_INTERSECT_INF;
+        return INTERSECTION_LINE;
     }
     /* HH */
     if (l1->type == LINE_TYPE_HORIZON && l2->type == LINE_TYPE_HORIZON)
     {
-        return LINE_INTERSECT_NOT;
+        return INTERSECTION_LINE;
     }
     /* VV */
     else if (l1->type == LINE_TYPE_VERT && l2->type == LINE_TYPE_VERT)
     {
-        return LINE_INTERSECT_NOT;
+        return INTERSECTION_NONE;
     }
     /* LL */
     else if (l1->type == LINE_TYPE_LIN && l2->type == LINE_TYPE_LIN)
@@ -164,7 +164,7 @@ int line_intersect(line *l1, line *l2, vector *intersection)
         intersection->x = (l2->b - l1->b) / (l1->a - l2->a);
         line_calc_from_x(&intersection->y, l1, intersection->x);
         
-        return LINE_INTERSECT_POINT;
+        return INTERSECTION_POINT;
     }
 
     line *vert = NULL;
@@ -200,7 +200,7 @@ int line_intersect(line *l1, line *l2, vector *intersection)
     {
         intersection->x = vert->b;
         intersection->y = horiz->b;
-        return LINE_INTERSECT_POINT;
+        return INTERSECTION_POINT;
     }
     /* VL */
     else if (vert != NULL && lin != NULL)
@@ -208,17 +208,17 @@ int line_intersect(line *l1, line *l2, vector *intersection)
 
         intersection->x = vert->b;
         line_calc_from_x(&intersection->y, lin, intersection->x);
-        return LINE_INTERSECT_POINT;
+        return INTERSECTION_POINT;
     }
     /* HL */
     else if (horiz != NULL && lin != NULL)
     {
         intersection->y = horiz->b;
         line_calc_from_y(&intersection->x, lin, intersection->y);
-        return LINE_INTERSECT_POINT;
+        return INTERSECTION_POINT;
     }
 
-    return LINE_INTERSECT_NOT;
+    return INTERSECTION_NONE;
 }
 /* Should be fixed by the methods of the air of the triangle == 0 */
 int line_contain_point(line *l, vector *p)
