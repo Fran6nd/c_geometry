@@ -64,6 +64,7 @@ int segment_intersect(segment *s1, segment *s2, intersection *si)
             if (segment_contain_point(s1, &intersection) && segment_contain_point(s2, &intersection))
             {
                 si->p = intersection;
+                si->type = INTERSECTION_POINT;
                 return INTERSECTION_POINT;
             }
             break;
@@ -95,6 +96,7 @@ int segment_intersect(segment *s1, segment *s2, intersection *si)
             {
                 si->s.p1 = contained[0];
                 si->s.p2 = contained[1];
+                si->type = INTERSECTION_SEGMENT;
                 return INTERSECTION_SEGMENT;
             }
         }
@@ -105,5 +107,6 @@ int segment_intersect(segment *s1, segment *s2, intersection *si)
             break;
         }
     }
+    si->type = INTERSECTION_NONE
     return INTERSECTION_NONE;
 }
