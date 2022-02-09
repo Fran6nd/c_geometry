@@ -1,6 +1,26 @@
 #ifndef geometry_h
 #define geometry_h
 
+#define LINE_TYPE_LIN 0
+#define LINE_TYPE_VERT 1
+#define LINE_TYPE_HORIZON 3
+#define LINE_TYPE_NULL 4
+
+#define SEGMENT_INTERSECT_IS_POINT 1
+#define SEGMENT_INTERSECT_IS_NONE 0
+/* Means that the intersection is a segment itself. */
+#define SEGMENT_INTERSECT_IS_SEGMENT -1
+
+#define LINE_TYPE_LIN 0
+#define LINE_TYPE_VERT 1
+#define LINE_TYPE_HORIZON 3
+#define LINE_TYPE_NULL 4
+
+#define LINE_INTERSECT_NOT 0
+#define LINE_INTERSECT_POINT 1
+#define LINE_INTERSECT_INF -1
+
+
 typedef struct
 {
     double x, y;
