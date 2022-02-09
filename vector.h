@@ -1,7 +1,7 @@
 #ifndef VECTOR_h
 #define VECTOR_h
 
-#include "structs.h"
+#include "geometry.h"
 
 vector vector_new(double x, double y);
 vector vector_sum(vector v1, vector v2);

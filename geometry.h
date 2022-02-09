@@ -1,5 +1,5 @@
-#ifndef struct_h
-#define struct_h
+#ifndef geometry_h
+#define geometry_h
 
 typedef struct
 {
@@ -22,7 +22,7 @@ typedef struct
     vector p1, p2;
 } segment;
 
-typedef struct segment_intersection
+typedef struct
 {
     union
     {
@@ -31,5 +31,14 @@ typedef struct segment_intersection
     };
 
 } segment_intersection;
+
+typedef struct {
+    char type;
+    union{
+        vector p;
+        segment s;
+        line l;
+    };
+} intesection;
 
 #endif

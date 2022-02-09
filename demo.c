@@ -3,7 +3,7 @@
 #include "vector.h"
 #include "line.h"
 #include "segment.h"
-#include "structs.h"
+#include "geometry.h"
 #ifdef _WIN32
 #include <Windows.h>
 #else
