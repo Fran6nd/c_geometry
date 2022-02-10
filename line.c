@@ -1,8 +1,8 @@
-#include "line.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "common.h"
 #include <math.h>
+#include "geometry.h"
 
 line line_new_from_segment(segment *s)
 {
