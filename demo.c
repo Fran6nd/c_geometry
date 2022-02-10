@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "vector.h"
 #include "geometry.h"
 #ifdef _WIN32
 #include <Windows.h>

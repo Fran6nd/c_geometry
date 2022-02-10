@@ -1,7 +1,7 @@
 #ifndef TRANSFORM_h
 #define TRANSFORM_h
 
-#include "vector.h"
+#include "geometry.h"
 typedef struct Transform Transform;
 struct Transform
 {

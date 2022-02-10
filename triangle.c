@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "triangle.h"
-#include "vector.h"
-#include "segment.h"
+#include "geometry.h"
+
 int sign(vector p1, vector p2, vector p3)
 {
     return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);

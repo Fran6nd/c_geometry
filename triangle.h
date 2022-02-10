@@ -1,9 +1,8 @@
 #ifndef triangle_h
 #define triangle_h
 
-#include "vector.h"
 #include "transform.h"
-#include "segment.h"
+#include "geometry.h"
 
 #define FOREACH_POINT_IN_TRIANGLE(t, p) for (vector * p = t.p ; p < t.p + 3; p++)
 #define FOREACH_SEGMENT_IN_TRIANGLE(t,s)\
