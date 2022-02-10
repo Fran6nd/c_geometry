@@ -1,4 +1,3 @@
-#include "segment.h"
 #include <stdio.h>
 #include "common.h"
 #include <math.h>

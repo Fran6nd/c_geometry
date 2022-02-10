@@ -56,4 +56,8 @@ intersection line_intersect(line *l1, line *l2);
 /* Return 1 if p is on l else 0. */
 int line_contain_point(line *l, vector *p);
 
+segment segment_new(vector p1, vector p2);
+int segment_contain_point(segment *s1, vector *p);
+intersection segment_intersect(segment *s1, segment *s2);
+
 #endif
