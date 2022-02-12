@@ -106,6 +106,23 @@ intersection segment_intersect(segment *s1, segment *s2)
             {
                 output.s.p1 = contained[0];
                 output.s.p2 = contained[1];
+
+
+                vector incoming = s1->p1;
+                vector sides[] = {((vector_sub(contained[0], i.p))), ((vector_sub(contained[1], i.p)))};
+                vector closest_side;
+
+                sides[0] = vector_set_arg(sides[0], vector_get_arg(&sides[0]));
+                sides[1] = vector_set_arg(sides[0], vector_get_arg(&sides[0])-180);
+
+                sides[0] = vector_set_module(sides[0], 30);
+                sides[1] = vector_set_module(sides[1], 30);
+
+                closest_side = vector_get_closest_to(vector_sub(incoming, i.p), sides[1], sides[0]);
+
+                output.normal = closest_side;
+
+
                 output.type = INTERSECTION_SEGMENT;
                 return output;
             }

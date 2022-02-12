@@ -64,6 +64,7 @@ void draw_intersection(SDL_Renderer * renderer, intersection i){
     case INTERSECTION_SEGMENT:
         draw_circle(renderer, VECTOR_TO_INT(i.s.p1), 5);
         draw_circle(renderer, VECTOR_TO_INT(i.s.p2), 5);
+        draw_arrow(renderer, i.p, vector_sum(i.p, i.normal));
         break;
     default:
         break;
