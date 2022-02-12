@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "geometry.h"
+#include "draw.h"
 #ifdef _WIN32
 #include <Windows.h>
 #else
@@ -8,10 +9,7 @@
 #endif
 
 /* Still interseting to see what macros can do! */
-#define VECTOR_TO_INT(VECT) (int)VECT.x, (int)VECT.y
-#define VECTOR_DRAW(POS, DIR) SDL_RenderDrawLine(renderer, VECTOR_TO_INT(POS), VECTOR_TO_INT(vector_sum(DIR, POS)));
-#define SEGMENT_DRAW(s) SDL_RenderDrawLine(renderer, VECTOR_TO_INT(s.p1), VECTOR_TO_INT(s.p2));
-#define SEGMENT_FROM_VECT(pos, dir) segment_new(pos, vector_sum(pos, dir))
+
 
 void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
 {

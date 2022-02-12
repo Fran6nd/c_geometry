@@ -52,6 +52,12 @@ vector vector_set_arg(vector v, double arg)
     output.x = cos(arg) * module;
     return output;
 }
+vector vector_set_module(vector v, double module)
+{
+    v = vector_normalize(v);
+    v = vector_mul(v, module);
+    return v;
+}
 vector vector_normalize(vector v)
 {
     vector output;

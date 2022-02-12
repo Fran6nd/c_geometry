@@ -31,6 +31,15 @@ line line_new_from_segment(segment *s)
     }
     return l1;
 }
+
+line line_from_ray(ray r){
+    segment s = {
+        .p1 = r.origin,
+        .p2 = vector_sum(r.dir, r.origin),
+    };
+    return line_new_from_segment(&s);
+}
+
 line line_new(double a, double b)
 {
     line l1 = {

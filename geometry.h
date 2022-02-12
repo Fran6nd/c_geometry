@@ -22,7 +22,7 @@ typedef struct
 
 typedef struct {
     vector origin;
-    float angle;
+    vector dir;
 } ray;
 
 typedef struct
@@ -55,6 +55,7 @@ vector vector_div(vector v, double d);
 double vector_get_arg(vector *v);
 double vector_get_module(vector *v);
 vector vector_set_arg(vector v, double arg);
+vector vector_set_module(vector v, double module);
 vector vector_normalize(vector v);
 void vector_increment(vector *v1, vector v2);
 void vector_decrement(vector *v1, vector *v2);
@@ -63,6 +64,7 @@ vector vector_zero();
 /* All the methods are used to deal with line structs. */
 
 line line_new_from_segment(segment *s);
+line line_from_ray(ray r);
 line line_new(double a, double b);
 line line_new_vert(double x);
 line line_new_horiz(double y);
@@ -78,5 +80,7 @@ int line_contain_point(line *l, vector *p);
 segment segment_new(vector p1, vector p2);
 int segment_contain_point(segment *s1, vector *p);
 intersection segment_intersect(segment *s1, segment *s2);
+
+ray ray_new(vector origin, vector dir);
 
 #endif

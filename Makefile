@@ -13,6 +13,6 @@ demo-line:
 	./tmp-demo-line
 	rm tmp-demo-line
 demo-raycast:
-	gcc demo-raycast.c -o tmp-demo-raycast line.c vector.c segment.c ray.c  $(SDL2_INCLUDE)
+	gcc demo-raycast.c -o tmp-demo-raycast line.c vector.c segment.c ray.c intersection.c  $(SDL2_INCLUDE)
 	./tmp-demo-raycast
 	rm tmp-demo-raycast

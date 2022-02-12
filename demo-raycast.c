@@ -1,17 +1,9 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "geometry.h"
-#ifdef _WIN32
-#include <Windows.h>
-#else
+#include "draw.h"
 #include <unistd.h>
-#endif
 
-/* Still interseting to see what macros can do! */
-#define VECTOR_TO_INT(VECT) (int)VECT.x, (int)VECT.y
-#define VECTOR_DRAW(POS, DIR) SDL_RenderDrawLine(renderer, VECTOR_TO_INT(POS), VECTOR_TO_INT(vector_sum(DIR, POS)));
-#define SEGMENT_DRAW(s) SDL_RenderDrawLine(renderer, VECTOR_TO_INT(s.p1), VECTOR_TO_INT(s.p2));
-#define SEGMENT_FROM_VECT(pos, dir) segment_new(pos, vector_sum(pos, dir))
 
 void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
 {
@@ -85,6 +77,8 @@ int main()
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
         SEGMENT_DRAW(SEGMENT_FROM_VECT(center, vct));
+
+        ray_draw(renderer, ray_new(vector_new(100,200), vector_new(150, 250)));
         //VECTOR_DRAW(center, vector_new(25, 25));
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
         for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
