@@ -80,8 +80,8 @@ intersection segment_intersect(segment *s1, segment *s2)
                 sides[0] =  vector_set_module(sides[0], 30);
                 sides[1] =  vector_set_module(sides[1], 30);
                 printf("%f %f : %f %f\n", sides[0].x, sides[0].y, sides[1].x, sides[1].y);
-                closest_side = vector_get_closest_to(incoming, vector_sum(i.p, sides[1]), vector_sum(i.p, sides[0]));
-                closest_side = vector_sub(closest_side, i.p);
+                closest_side = vector_get_closest_to(vector_sub(incoming, i.p), sides[1], sides[0]);
+                //closest_side = vector_sub(closest_side, i.p);
                 //closest_side = vector_sub(s1->p1, i.p);
                 //closest_side = vector_mul(closest_side, 20);
                 output.normal = closest_side;
