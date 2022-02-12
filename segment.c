@@ -61,36 +61,19 @@ intersection segment_intersect(segment *s1, segment *s2)
             if (segment_contain_point(s1, &i.p) && segment_contain_point(s2, &i.p))
             {
                 vector incoming = s1->p1;
-                vector sides[] = { ( (vector_sub(s2->p1, i.p))), (( vector_sub(s2->p2, i.p)))};
+                vector sides[] = {((vector_sub(s2->p1, i.p))), ((vector_sub(s2->p2, i.p)))};
                 vector closest_side;
-                //sides[0] =  vector_set_module(sides[0], 30);
-                //sides[1] =  vector_set_module(sides[1], 30);
 
-              //  sides[1] = vector_sum(sides[1], i.p);
-             //   sides[0] = vector_sum(sides[0], i.p);
-                //sides[1] = vector_mul(sides[1], 20);
-               // sides[0] =  vector_sub( sides[0], incoming);
-              //  sides[1] =  vector_sub(sides[1], incoming);
-                
-               // printf("%f, %f \n", vector_get_module(&sides[0] ) , vector_get_module(&sides[1]));
                 sides[0] = vector_set_arg(sides[0], vector_get_arg(&sides[0]) - 90);
-               sides[1] = vector_set_arg(sides[0], vector_get_arg(&sides[0]) - 180);
-                
-                
-                sides[0] =  vector_set_module(sides[0], 30);
-                sides[1] =  vector_set_module(sides[1], 30);
-                printf("%f %f : %f %f\n", sides[0].x, sides[0].y, sides[1].x, sides[1].y);
+                sides[1] = vector_set_arg(sides[0], vector_get_arg(&sides[0]) - 180);
+
+                sides[0] = vector_set_module(sides[0], 30);
+                sides[1] = vector_set_module(sides[1], 30);
+
                 closest_side = vector_get_closest_to(vector_sub(incoming, i.p), sides[1], sides[0]);
-                //closest_side = vector_sub(closest_side, i.p);
-                //closest_side = vector_sub(s1->p1, i.p);
-                //closest_side = vector_mul(closest_side, 20);
+
                 output.normal = closest_side;
-                //output.normal = sides[0];
-
-
-
                 output.p = i.p;
-               // output.p = s1->p1;
                 output.type = INTERSECTION_POINT;
                 return output;
             }
