@@ -59,7 +59,6 @@ int main()
         SDL_SetRenderDrawColor(renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
         SEGMENT_DRAW(SEGMENT_FROM_VECT(center, vct));
 
-        draw_arrow(renderer, vector_new(100,200), vector_new(150, 250));
         //VECTOR_DRAW(center, vector_new(25, 25));
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
         for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
@@ -70,6 +69,7 @@ int main()
         {
             segment s = SEGMENT_FROM_VECT(center, vct);
             intersection si = segment_intersect(&s, &seg[i] );
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
             draw_intersection(renderer, si);
 
         }
