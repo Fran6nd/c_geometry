@@ -4,25 +4,6 @@
 #include "draw.h"
 #include <unistd.h>
 
-
-void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
-{
-    for (int x1 = -radius; x1 <= radius; x1++)
-    {
-        for (int y1 = -radius; y1 <= radius; y1++)
-        {
-            if (x1 == -radius || y1 == -radius || x1 == radius || y1 == radius)
-            {
-
-                vector v = vector_new(x1, y1);
-                v = vector_normalize(v);
-                v = vector_mul(v, radius);
-                SDL_RenderDrawPoint(renderer, (int)v.x + x, (int)v.y + y);
-            }
-        }
-    }
-}
-
 int main()
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -89,29 +70,8 @@ int main()
         {
             segment s = SEGMENT_FROM_VECT(center, vct);
             intersection si = segment_intersect(&s, &seg[i] );
-            //printf("%d\n", type);
-            if (si.type == INTERSECTION_POINT)
-            {
-                draw_circle(renderer, VECTOR_TO_INT(si.p), 5);
-            }
-            else if (si.type == INTERSECTION_SEGMENT)
-            {
-                //o\n");
-                //if (segment_contain_point(&s, &si.seg.p1))
-                {
-                  //  printf("%d %d\n", VECTOR_TO_INT(si.seg.p1));
-                    draw_circle(renderer, VECTOR_TO_INT(si.s.p1), 5);
-                }
-                //if (segment_contain_point(&s, &si.seg.p2))
-                {
-                   // printf("%d %d\n", VECTOR_TO_INT(si.seg.p2));
-                    draw_circle(renderer, VECTOR_TO_INT(si.s.p2), 5);
-                }
+            draw_intersection(renderer, si);
 
-            }
-            else
-            {
-            }
         }
         SDL_RenderPresent(renderer);
         // Get the next event

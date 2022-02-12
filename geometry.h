@@ -43,6 +43,7 @@ typedef struct {
         segment s;
         line l;
     };
+    vector normal;
 } intersection;
 
 /* All the methods are used to deal with vector structs. */
@@ -60,6 +61,7 @@ vector vector_normalize(vector v);
 void vector_increment(vector *v1, vector v2);
 void vector_decrement(vector *v1, vector *v2);
 vector vector_zero();
+vector vector_get_closest_to(vector target, vector v1, vector v2);
 
 /* All the methods are used to deal with line structs. */
 
