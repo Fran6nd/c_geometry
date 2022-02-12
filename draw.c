@@ -25,13 +25,13 @@ void ray_draw(SDL_Renderer * renderer, ray r){
     
     vector v1 = vector_normalize(r.dir);
     v1 = vector_set_module(v1, 20);
-    double arg = vector_get_arg(&v1);
+    double arg = vector_get_arg(v1);
     arg -= 45;
     v1 = vector_set_arg(v1, arg);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
     v1 = vector_normalize(r.dir);
     v1 = vector_set_module(v1, 20);
-    arg = vector_get_arg(&v1);
+    arg = vector_get_arg(v1);
     arg += 45;
     v1 = vector_set_arg(v1, arg);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
@@ -41,15 +41,15 @@ void draw_arrow(SDL_Renderer * renderer, vector origin, vector head){
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(origin), VECTOR_TO_INT(head));
     vector v1 = vector_normalize(vector_sub(head, origin));
     vector body = vector_sub(head, origin);
-    double module = vector_get_module(&body);
+    double module = vector_get_module(body);
     v1 = vector_set_module(v1, module/10);
-    double arg = vector_get_arg(&body);
+    double arg = vector_get_arg(body);
     arg -= 135;
     v1 = vector_set_arg(v1, arg);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
     v1 = vector_normalize(body);
     v1 = vector_set_module(v1, module/10);
-    arg = vector_get_arg(&body);
+    arg = vector_get_arg(body);
     arg += 135;
     v1 = vector_set_arg(v1, arg);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));

@@ -65,8 +65,8 @@ intersection segment_intersect(segment *s1, segment *s2)
                 vector sides[] = {((vector_sub(s2->p1, i.p))), ((vector_sub(s2->p2, i.p)))};
                 vector closest_side;
 
-                sides[0] = vector_set_arg(sides[0], vector_get_arg(&sides[0]) - 90);
-                sides[1] = vector_set_arg(sides[0], vector_get_arg(&sides[0]) - 180);
+                sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 90);
+                sides[1] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 180);
 
                 sides[0] = vector_set_module(sides[0], 30);
                 sides[1] = vector_set_module(sides[1], 30);
@@ -113,8 +113,8 @@ intersection segment_intersect(segment *s1, segment *s2)
                 vector sides[] = {((vector_sub(contained[0], i.p))), ((vector_sub(contained[1], i.p)))};
                 vector closest_side;
 
-                sides[0] = vector_set_arg(sides[0], vector_get_arg(&sides[0]));
-                sides[1] = vector_set_arg(sides[0], vector_get_arg(&sides[0])-180);
+                sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]));
+                sides[1] = vector_set_arg(sides[0], vector_get_arg(sides[0])-180);
 
                 sides[0] = vector_set_module(sides[0], 30);
                 sides[1] = vector_set_module(sides[1], 30);
