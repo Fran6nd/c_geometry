@@ -135,6 +135,7 @@ void line_print(line *l)
 intersection line_intersect(line *l1, line *l2)
 {
     intersection output;
+    output.normal = vector_zero();
     /*
         This is some kind of simple brute force :p
         H means horizontal line,

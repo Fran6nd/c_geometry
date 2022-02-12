@@ -50,6 +50,7 @@ int segment_contain_point(segment *s, vector *p)
 intersection segment_intersect(segment *s1, segment *s2)
 {
     intersection output;
+    output.normal = vector_zero();
     line l1 = line_new_from_segment(s1);
     line l2 = line_new_from_segment(s2);
     intersection i = line_intersect(&l1, &l2);
