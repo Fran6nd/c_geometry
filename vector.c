@@ -60,10 +60,9 @@ vector vector_set_module(vector v, double module)
 }
 vector vector_normalize(vector v)
 {
-    vector output;
     double arg = vector_get_arg(&v);
-    output.y = sin(arg);
-    output.x = cos(arg);
+    vector output = vector_new(0, 1);
+    output = vector_set_arg(output, arg);
     return output;
 }
 void vector_increment(vector * v1, vector v2){
@@ -77,4 +76,17 @@ void vector_decrement(vector * v1, vector* v2){
 vector vector_zero(){
     vector v = {0,0};
     return v;
+}
+
+vector vector_get_closest_to(vector target, vector v1, vector v2){
+    vector v11 = vector_sub(target, v1);
+    vector v22 = vector_sub(target, v2);
+    double d1, d2;
+    d1 = vector_get_module(&v11);
+    d2 = vector_get_module(&v22);
+    if(d1>d2){
+        return v2;
+    }
+    return v1;
+
 }
