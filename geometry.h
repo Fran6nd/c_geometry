@@ -46,7 +46,7 @@ typedef struct {
     vector normal;
 } intersection;
 
-/* All the methods are used to deal with vector structs. */
+/* All these methods are used to deal with vector structs. */
 
 vector vector_new(double x, double y);
 vector vector_sum(vector v1, vector v2);
@@ -63,7 +63,7 @@ void vector_decrement(vector *v1, vector *v2);
 vector vector_zero();
 vector vector_get_closest_to(vector target, vector v1, vector v2);
 
-/* All the methods are used to deal with line structs. */
+/* All these methods are used to deal with line structs. */
 
 line line_new_from_segment(segment *s);
 line line_from_ray(ray r);
@@ -77,11 +77,18 @@ intersection line_intersect(line *l1, line *l2);
 /* Return 1 if p is on l else 0. */
 int line_contain_point(line *l, vector *p);
 
-/* All the methods are used to deal with segment structs. */
+/* All these methods are used to deal with segment structs. */
 
 segment segment_new(vector p1, vector p2);
 int segment_contain_point(segment *s1, vector *p);
+/*
+For raycasting purpose, [intersection] contains a field [normal].
+To get it work properly, we will assume that the ray is starting from [s1->p1] and ending at [s1->p2].
+[s2] Being a shape of the obstacle.
+*/
 intersection segment_intersect(segment *s1, segment *s2);
+
+/* All these methods are used to deal with ray structs. */
 
 ray ray_new(vector origin, vector dir);
 
