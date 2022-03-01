@@ -132,7 +132,7 @@ void line_print(line *l)
     }
 }
 
-intersection line_intersect(line *l1, line *l2)
+intersection line_intersect_line(line *l1, line *l2)
 {
     intersection output;
     output.normal = vector_zero();

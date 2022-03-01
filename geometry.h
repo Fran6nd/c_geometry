@@ -23,6 +23,7 @@ typedef struct
 typedef struct {
     vector origin;
     vector dir;
+    double range;
 } ray;
 
 typedef struct
@@ -73,7 +74,6 @@ line line_new_horiz(double y);
 int line_calc_from_x(double *output, line *l, double x);
 int line_calc_from_y(double *output, line *l, double y);
 void line_print(line *l);
-intersection line_intersect(line *l1, line *l2);
 /* Return 1 if p is on l else 0. */
 int line_contain_point(line *l, vector *p);
 
@@ -83,13 +83,18 @@ segment segment_new(vector p1, vector p2);
 int segment_contain_point(segment *s1, vector *p);
 /*
 For raycasting purpose, [intersection] contains a field [normal].
-To get it work properly, we will assume that the ray is starting from [s1->p1] and ending at [s1->p2].
-[s2] Being a shape of the obstacle.
+To get it work properly, we will assume that the ray is starting from [ray->p1] and ending at [ray->p2].
+[seg] Being a shape of the obstacle.
 */
-intersection segment_intersect(segment *s1, segment *s2);
+intersection segment_intersect(segment *ray, segment *seg);
 
 /* All these methods are used to deal with ray structs. */
 
-ray ray_new(vector origin, vector dir);
+ray ray_new(vector origin, vector dir, double range);
+
+/* About getting intersections. */
+intersection line_intersect_line(line *l1, line *l2);
+intersection line_intersect_segment(line *l, segment *s);
+#define segment_intersect_line(s, l) line_intersect_segment(l, s);
 
 #endif

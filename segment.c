@@ -47,22 +47,23 @@ int segment_contain_point(segment *s, vector *p)
 #undef C
     return 0;
 }
-intersection segment_intersect(segment *s1, segment *s2)
+
+intersection segment_intersect(segment *ray, segment *seg)
 {
     intersection output;
     output.normal = vector_zero();
-    line l1 = line_new_from_segment(s1);
-    line l2 = line_new_from_segment(s2);
-    intersection i = line_intersect(&l1, &l2);
+    line l1 = line_new_from_segment(ray);
+    line l2 = line_new_from_segment(seg);
+    intersection i = line_intersect_line(&l1, &l2);
     if (i.type != INTERSECTION_NONE)
     {
         switch (i.type)
         {
         case INTERSECTION_POINT:
-            if (segment_contain_point(s1, &i.p) && segment_contain_point(s2, &i.p))
+            if (segment_contain_point(ray, &i.p) && segment_contain_point(seg, &i.p))
             {
-                vector incoming = s1->p1;
-                vector sides[] = {((vector_sub(s2->p1, i.p))), ((vector_sub(s2->p2, i.p)))};
+                vector incoming = ray->p1;
+                vector sides[] = {((vector_sub(seg->p1, i.p))), ((vector_sub(seg->p2, i.p)))};
                 vector closest_side;
 
                 sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 90);
@@ -83,24 +84,24 @@ intersection segment_intersect(segment *s1, segment *s2)
         {
             vector contained[2];
             int index = 0;
-            if (segment_contain_point(s2, &s1->p1))
+            if (segment_contain_point(seg, &ray->p1))
             {
-                contained[index] = s1->p1;
+                contained[index] = ray->p1;
                 index++;
             }
-            if (segment_contain_point(s2, &s1->p2))
+            if (segment_contain_point(seg, &ray->p2))
             {
-                contained[index] = s1->p2;
+                contained[index] = ray->p2;
                 index++;
             }
-            if (segment_contain_point(s1, &s2->p1) && index < 2)
+            if (segment_contain_point(ray, &seg->p1) && index < 2)
             {
-                contained[index] = s2->p1;
+                contained[index] = seg->p1;
                 index++;
             }
-            if (segment_contain_point(s1, &s2->p2) && index < 2)
+            if (segment_contain_point(ray, &seg->p2) && index < 2)
             {
-                contained[index] = s2->p2;
+                contained[index] = seg->p2;
                 index++;
             }
             if (index == 2)
@@ -109,7 +110,7 @@ intersection segment_intersect(segment *s1, segment *s2)
                 output.s.p2 = contained[1];
 
 
-                vector incoming = s1->p1;
+                vector incoming = ray->p1;
                 vector sides[] = {((vector_sub(contained[0], i.p))), ((vector_sub(contained[1], i.p)))};
                 vector closest_side;
 
