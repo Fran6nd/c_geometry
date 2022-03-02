@@ -63,32 +63,35 @@ intersection ray_intersect_segment(ray *r, segment *s)
             int index = 0;
             /* If these vectors got the same arg, they share the same direction. */
             output.normal = vector_set_module(vector_sub(vector_zero(), r->dir), 30);
-            if (ray_contain_point(*r, s->p1))
+            if (ray_contain_point(*r, s->p1) || (ray_contain_point(*r, s->p2)))
             {
-                tmp[index] = &s->p1;
-                index++;
-            }
-            if (ray_contain_point(*r, s->p2))
-            {
-                tmp[index] = &s->p2;
-                index++;
-            }
+                if (ray_contain_point(*r, s->p1))
+                {
+                    tmp[index] = &s->p1;
+                    index++;
+                }
+                else
+                {
+                    tmp[index] = &r->origin;
+                    index++;
+                }
+                if (ray_contain_point(*r, s->p2))
+                {
+                    tmp[index] = &s->p2;
+                    index++;
+                }
+                else
+                {
+                    tmp[index] = &r->origin;
+                    index++;
+                }
 
-            /* If one */
-            if (index == 1)
-            {
-                output.type = INTERSECTION_POINT;
-                output.p = *tmp[0];
-                return output;
-            }
-            /* If two */
-            else if (index == 2)
-            {
                 output.type = INTERSECTION_POINT;
                 output.p = vector_get_closest_to(r->origin, *tmp[0], *tmp[1]);
                 return output;
+
+                break;
             }
-            break;
         }
 
         default:

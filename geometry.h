@@ -1,6 +1,9 @@
 #ifndef geometry_h
 #define geometry_h
 
+#define ACCURACY 100
+#define ALMOST_EQ(a, b) ((a * ACCURACY - b* ACCURACY) * (a * ACCURACY - b* ACCURACY))  < ACCURACY
+
 #define INTERSECTION_POINT 1
 #define INTERSECTION_NONE 0
 /* Means that the intersection is a segment itself. */
@@ -64,6 +67,7 @@ void vector_increment(vector *v1, vector v2);
 void vector_decrement(vector *v1, vector *v2);
 vector vector_zero();
 vector vector_get_closest_to(vector target, vector v1, vector v2);
+#define vector_eq(v1, v2) (ALMOST_EQ(v1.x, v2.x) && ALMOST_EQ(v1.y, v2.y))
 
 /* All these methods are used to deal with line structs. */
 
