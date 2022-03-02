@@ -246,19 +246,19 @@ int line_contain_point(line *l, vector *p)
     {
     case LINE_TYPE_LIN:
         if (line_calc_from_x(&res, l, p->x) == 0)
-            if (res == p->y)
+            if ( ALMOST_EQ( res, p->y))
             {
                 return 1;
             }
         break;
     case LINE_TYPE_VERT:
-        if (p->x == l->b)
+        if (ALMOST_EQ(p->x , l->b))
         {
             return 1;
         }
         break;
     case LINE_TYPE_HORIZON:
-        if (p->y == l->b)
+        if ( ALMOST_EQ(p->y, l->b))
         {
             return 1;
         }
