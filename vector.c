@@ -2,7 +2,8 @@
 #include "geometry.h"
 
 #define PI 3.14159265358979323846264338327950288
-vector vector_new(double x, double y){
+vector vector_new(double x, double y)
+{
     vector v = {.x = x, .y = y};
     return v;
 }
@@ -36,12 +37,22 @@ vector vector_div(vector v, double d)
 }
 double vector_get_arg(vector v)
 {
-    return 90-atan2(v.x, v.y)* (180.0 / PI);
+    return 90 - atan2(v.x, v.y) * (180.0 / PI);
+}
+double vector_get_positive_arg(vector v)
+{
+    double output = 90 - atan2(v.x, v.y) * (180.0 / PI);
+    while (output <= 0)
+    {
+        output += 360;
+    }
+    return output;
 }
 double vector_get_module(vector v)
 {
     return sqrt(pow(v.x, 2) + pow(v.y, 2));
 }
+
 /* arg is given in degrees. */
 vector vector_set_arg(vector v, double arg)
 {
@@ -65,28 +76,32 @@ vector vector_normalize(vector v)
     output = vector_set_arg(output, arg);
     return output;
 }
-void vector_increment(vector * v1, vector v2){
+void vector_increment(vector *v1, vector v2)
+{
     v1->x = v1->x + v2.x;
     v1->y = v1->y + v2.y;
 }
-void vector_decrement(vector * v1, vector* v2){
+void vector_decrement(vector *v1, vector *v2)
+{
     v1->x = v1->x - v2->x;
     v1->y = v1->y - v2->y;
 }
-vector vector_zero(){
-    vector v = {0,0};
+vector vector_zero()
+{
+    vector v = {0, 0};
     return v;
 }
 
-vector vector_get_closest_to(vector target, vector v1, vector v2){
+vector vector_get_closest_to(vector target, vector v1, vector v2)
+{
     vector v11 = vector_sub(target, v1);
     vector v22 = vector_sub(target, v2);
     double d1, d2;
     d1 = vector_get_module(v11);
     d2 = vector_get_module(v22);
-    if(d1>d2){
+    if (d1 > d2)
+    {
         return v2;
     }
     return v1;
-
 }
