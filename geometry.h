@@ -91,6 +91,7 @@ intersection segment_intersect(segment *ray, segment *seg);
 /* All these methods are used to deal with ray structs. */
 
 ray ray_new(vector origin, vector dir, double range);
+int ray_contain_point(ray r, vector p);
 
 /* About getting intersections. */
 intersection line_intersect_line(line *l1, line *l2);

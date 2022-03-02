@@ -1,4 +1,5 @@
 #include "geometry.h"
+#include "common.h"
 
 ray ray_new(vector origin, vector dir, double range){
     ray r = {
@@ -7,4 +8,16 @@ ray ray_new(vector origin, vector dir, double range){
         .range = range,
     };
     return r;
+}
+int ray_contain_point(ray r, vector p){
+    line l = line_new_from_ray(r);
+    if(line_contain_point(&l, &p)){
+        vector relative_pos_of_p = vector_sub(p,r.origin);
+        if(ALMOST_EQ(vector_get_arg(relative_pos_of_p), vector_get_arg(r.dir))){
+            if (r.range == 0 || vector_get_module(relative_pos_of_p) < r.range){
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
