@@ -52,7 +52,22 @@ intersection ray_intersect_segment(ray *r, segment *s)
             {
                 if (ray_contain_point(*r, output.p))
                 {
-                    goto found_intersection;
+                    /* We create two vectors from the intersection point with segment ending as directions. */
+                    vector sides[] = {((vector_sub(s->p1, output.p))), ((vector_sub(s->p2, output.p)))};
+
+                    /* Now we rotate these vectors to make them perpendiculars to the segment in both directions. */
+                    sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 90);
+                    sides[1] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 180);
+                    /* Now we set them the same module. */
+                    sides[0] = vector_set_module(sides[0], 30);
+                    sides[1] = vector_set_module(sides[1], 30);
+                    /* Now the closest one must be the normal angle */
+                    vector closest_normal;
+                    closest_normal = vector_get_closest_to(vector_sub(r->origin, output.p), sides[1], sides[0]);
+
+                    output.normal = closest_normal;
+                    output.type = INTERSECTION_POINT;
+                    return output;
                 }
             }
             break;
@@ -101,23 +116,5 @@ intersection ray_intersect_segment(ray *r, segment *s)
     }
     /* Default returned value by the statment. */
     output.type = INTERSECTION_NONE;
-    return output;
-    /* Here we do the normal vector calculation. */
-found_intersection:;
-    /* We create two vectors from the intersection point with segment ending as directions. */
-    vector sides[] = {((vector_sub(s->p1, output.p))), ((vector_sub(s->p2, output.p)))};
-
-    /* Now we rotate these vectors to make them perpendiculars to the segment in both directions. */
-    sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 90);
-    sides[1] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 180);
-    /* Now we set them the same module. */
-    sides[0] = vector_set_module(sides[0], 30);
-    sides[1] = vector_set_module(sides[1], 30);
-    /* Now the closest one must be the normal angle */
-    vector closest_normal;
-    closest_normal = vector_get_closest_to(vector_sub(r->origin, output.p), sides[1], sides[0]);
-
-    output.normal = closest_normal;
-    output.type = INTERSECTION_POINT;
     return output;
 }
