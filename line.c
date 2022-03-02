@@ -270,3 +270,8 @@ int line_contain_point(line *l, vector *p)
     }
     return 0;
 }
+
+line line_new_from_ray(ray r){
+    segment s = segment_new(r.origin, vector_sum(r.origin, r.dir));
+    return line_new_from_segment(&s);
+}

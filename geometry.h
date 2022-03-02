@@ -67,7 +67,7 @@ vector vector_get_closest_to(vector target, vector v1, vector v2);
 /* All these methods are used to deal with line structs. */
 
 line line_new_from_segment(segment *s);
-line line_from_ray(ray r);
+line line_new_from_ray(ray r);
 line line_new(double a, double b);
 line line_new_vert(double x);
 line line_new_horiz(double y);
