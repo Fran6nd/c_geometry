@@ -100,10 +100,11 @@ intersection ray_intersect_segment(ray *r, segment *s)
                     tmp[index] = &r->origin;
                     index++;
                 }
-
                 output.type = INTERSECTION_POINT;
                 output.p = vector_get_closest_to(r->origin, *tmp[0], *tmp[1]);
-                return output;
+
+                if (ray_contain_point(*r, output.p))
+                    return output;
 
                 break;
             }
