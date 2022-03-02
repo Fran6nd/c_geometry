@@ -97,5 +97,6 @@ int ray_contain_point(ray r, vector p);
 intersection line_intersect_line(line *l1, line *l2);
 intersection line_intersect_segment(line *l, segment *s);
 #define segment_intersect_line(s, l) line_intersect_segment(l, s);
+intersection ray_intersect_segment(ray *r, segment *s);
 
 #endif

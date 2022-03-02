@@ -8,11 +8,11 @@ test:
 	gcc test.c -o tmp-test line.c vector.c segment.c triangle.c
 	./tmp-test
 	rm tmp-test
-demo-line:
-	gcc demo-line.c -o tmp-demo-line line.c vector.c segment.c  $(SDL2_INCLUDE)
-	./tmp-demo-line
-	rm tmp-demo-line
-demo-raycast:
-	gcc demo-raycast.c -o tmp-demo-raycast line.c vector.c segment.c ray.c draw.c intersection.c  $(SDL2_INCLUDE)
-	./tmp-demo-raycast
-	rm tmp-demo-raycast
+demo-raycast-using-rays:
+	gcc demo-raycast-using-rays.c -o tmp-demo line.c vector.c segment.c ray.c draw.c intersection.c  $(SDL2_INCLUDE)
+	./tmp-demo
+	rm tmp-demo
+demo-raycast-using-segments:
+	gcc demo-raycast-using-segments.c -o tmp-demo line.c vector.c segment.c ray.c draw.c intersection.c  $(SDL2_INCLUDE)
+	./tmp-demo
+	rm tmp-demo

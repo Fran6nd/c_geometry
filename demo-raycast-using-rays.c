@@ -2,32 +2,7 @@
 #include <SDL2/SDL.h>
 #include "geometry.h"
 #include "draw.h"
-#ifdef _WIN32
-#include <Windows.h>
-#else
 #include <unistd.h>
-#endif
-
-/* Still interseting to see what macros can do! */
-
-
-void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
-{
-    for (int x1 = -radius; x1 <= radius; x1++)
-    {
-        for (int y1 = -radius; y1 <= radius; y1++)
-        {
-            if (x1 == -radius || y1 == -radius || x1 == radius || y1 == radius)
-            {
-
-                vector v = vector_new(x1, y1);
-                v = vector_normalize(v);
-                v = vector_mul(v, radius);
-                SDL_RenderDrawPoint(renderer, (int)v.x + x, (int)v.y + y);
-            }
-        }
-    }
-}
 
 int main()
 {
@@ -83,6 +58,7 @@ int main()
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
         SEGMENT_DRAW(SEGMENT_FROM_VECT(center, vct));
+
         //VECTOR_DRAW(center, vector_new(25, 25));
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
         for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
@@ -91,31 +67,11 @@ int main()
         }
         for (int i = 0; i < sizeof(seg) / sizeof(seg[0]); i++)
         {
-            segment s = SEGMENT_FROM_VECT(center, vct);
-            intersection si = segment_intersect(&s, &seg[i] );
-            //printf("%d\n", type);
-            if (si.type == INTERSECTION_POINT)
-            {
-                draw_circle(renderer, VECTOR_TO_INT(si.p), 5);
-            }
-            else if (si.type == INTERSECTION_SEGMENT)
-            {
-                //o\n");
-                //if (segment_contain_point(&s, &si.seg.p1))
-                {
-                  //  printf("%d %d\n", VECTOR_TO_INT(si.seg.p1));
-                    draw_circle(renderer, VECTOR_TO_INT(si.s.p1), 5);
-                }
-                //if (segment_contain_point(&s, &si.seg.p2))
-                {
-                   // printf("%d %d\n", VECTOR_TO_INT(si.seg.p2));
-                    draw_circle(renderer, VECTOR_TO_INT(si.s.p2), 5);
-                }
+            ray r = ray_new(center, vct, 0);
+            intersection si = ray_intersect_segment(&r, &seg[i] );
+            SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+            draw_intersection(renderer, si);
 
-            }
-            else
-            {
-            }
         }
         SDL_RenderPresent(renderer);
         // Get the next event
