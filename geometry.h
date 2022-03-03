@@ -2,7 +2,7 @@
 #define geometry_h
 
 #define ACCURACY 100
-#define ALMOST_EQ(a, b) ((a * ACCURACY - b* ACCURACY) * (a * ACCURACY - b* ACCURACY))  < ACCURACY
+#define ALMOST_EQ(a, b) ((a * ACCURACY - b * ACCURACY) * (a * ACCURACY - b * ACCURACY)) < ACCURACY
 
 #define INTERSECTION_POINT 1
 #define INTERSECTION_NONE 0
@@ -12,6 +12,9 @@
 #define INTERSECTION_LINE -2
 /* Means that the intersection is an half line (ray) itself. */
 #define INTERSECTION_RAY -3
+
+#define RAYCAST_NONE 0
+#define RAYCAST_POINT 1
 
 #define LINE_TYPE_LIN 0
 #define LINE_TYPE_VERT 1
@@ -23,7 +26,8 @@ typedef struct
     double x, y;
 } vector;
 
-typedef struct {
+typedef struct
+{
     vector origin;
     vector dir;
     double range;
@@ -40,15 +44,25 @@ typedef struct
     vector p1, p2;
 } segment;
 
-typedef struct {
+/* The difference between intersection and raycast_hit is that a raycast_hit can return only the closest point found, and a normal vector to the hitten segment. */
+
+typedef struct
+{
     char type;
-    union{
+    union
+    {
         vector p;
         segment s;
         line l;
     };
-    vector normal;
 } intersection;
+
+typedef struct
+{
+    char type;
+    vector p;
+    vector normal;
+} raycast_hit;
 
 /* All these methods are used to deal with vector structs. */
 
@@ -98,7 +112,7 @@ intersection segment_intersect(segment *ray, segment *seg);
 ray ray_new(vector origin, vector dir, double range);
 int ray_contain_point(ray r, vector p);
 
-/* About getting intersections. */
+/* About getting intersections and raycasting. */
 intersection line_intersect_line(line *l1, line *l2);
 intersection line_intersect_segment(line *l, segment *s);
 #define segment_intersect_line(s, l) line_intersect_segment(l, s);

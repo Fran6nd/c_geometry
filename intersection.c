@@ -1,5 +1,4 @@
 #include "geometry.h"
-#include "common.h"
 #include "stdlib.h"
 
 intersection line_intersect_segment(line *l, segment *s)
@@ -65,7 +64,7 @@ intersection ray_intersect_segment(ray *r, segment *s)
                     vector closest_normal;
                     closest_normal = vector_get_closest_to(vector_sub(r->origin, output.p), sides[1], sides[0]);
 
-                    output.normal = closest_normal;
+                    //output.normal = closest_normal;
                     output.type = INTERSECTION_POINT;
                     return output;
                 }
@@ -77,7 +76,7 @@ intersection ray_intersect_segment(ray *r, segment *s)
             vector *tmp[2] = {NULL};
             int index = 0;
             /* If these vectors got the same arg, they share the same direction. */
-            output.normal = vector_set_module(vector_sub(vector_zero(), r->dir), 30);
+            //output.normal = vector_set_module(vector_sub(vector_zero(), r->dir), 30);
             if (ray_contain_point(*r, s->p1) || (ray_contain_point(*r, s->p2)))
             {
                 if (ray_contain_point(*r, s->p1))

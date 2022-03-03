@@ -1,5 +1,4 @@
 #include "geometry.h"
-#include "common.h"
 
 ray ray_new(vector origin, vector dir, double range)
 {

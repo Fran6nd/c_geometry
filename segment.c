@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "common.h"
 #include <math.h>
 #include "geometry.h"
 
@@ -51,7 +50,6 @@ int segment_contain_point(segment *s, vector *p)
 intersection segment_intersect(segment *ray, segment *seg)
 {
     intersection output;
-    output.normal = vector_zero();
     line l1 = line_new_from_segment(ray);
     line l2 = line_new_from_segment(seg);
     intersection i = line_intersect_line(&l1, &l2);
@@ -62,19 +60,6 @@ intersection segment_intersect(segment *ray, segment *seg)
         case INTERSECTION_POINT:
             if (segment_contain_point(ray, &i.p) && segment_contain_point(seg, &i.p))
             {
-                vector incoming = ray->p1;
-                vector sides[] = {((vector_sub(seg->p1, i.p))), ((vector_sub(seg->p2, i.p)))};
-                vector closest_side;
-
-                sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 90);
-                sides[1] = vector_set_arg(sides[0], vector_get_arg(sides[0]) - 180);
-
-                sides[0] = vector_set_module(sides[0], 30);
-                sides[1] = vector_set_module(sides[1], 30);
-
-                closest_side = vector_get_closest_to(vector_sub(incoming, i.p), sides[1], sides[0]);
-
-                output.normal = closest_side;
                 output.p = i.p;
                 output.type = INTERSECTION_POINT;
                 return output;
@@ -109,23 +94,13 @@ intersection segment_intersect(segment *ray, segment *seg)
                 output.s.p1 = contained[0];
                 output.s.p2 = contained[1];
 
-
-                vector incoming = ray->p1;
-                vector sides[] = {((vector_sub(contained[0], i.p))), ((vector_sub(contained[1], i.p)))};
-                vector closest_side;
-
-                sides[0] = vector_set_arg(sides[0], vector_get_arg(sides[0]));
-                sides[1] = vector_set_arg(sides[0], vector_get_arg(sides[0])-180);
-
-                sides[0] = vector_set_module(sides[0], 30);
-                sides[1] = vector_set_module(sides[1], 30);
-
-                closest_side = vector_get_closest_to(vector_sub(incoming, i.p), sides[1], sides[0]);
-
-                output.normal = closest_side;
-
-
                 output.type = INTERSECTION_SEGMENT;
+                return output;
+            }
+            else if (index == 1)
+            {
+                output.p = contained[0];
+                output.type = INTERSECTION_POINT;
                 return output;
             }
         }
