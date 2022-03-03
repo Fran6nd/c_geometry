@@ -118,4 +118,7 @@ intersection line_intersect_segment(line *l, segment *s);
 #define segment_intersect_line(s, l) line_intersect_segment(l, s);
 intersection ray_intersect_segment(ray *r, segment *s);
 
+/* About raycasting stuff. */
+raycast_hit raycast_segment(ray r, segment s);
+
 #endif

@@ -14,5 +14,6 @@ void draw_circle(SDL_Renderer *renderer, int x, int y, int radius);
 void ray_draw(SDL_Renderer * renderer, ray r);
 void draw_arrow(SDL_Renderer * renderer, vector origin, vector head);
 void draw_intersection(SDL_Renderer * renderer, intersection i);
+void draw_raycast_hit(SDL_Renderer * renderer, raycast_hit i);
 
 #endif

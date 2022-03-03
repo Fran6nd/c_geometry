@@ -19,10 +19,11 @@ void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
     }
 }
 
-void ray_draw(SDL_Renderer * renderer, ray r){
+void ray_draw(SDL_Renderer *renderer, ray r)
+{
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(r.origin), VECTOR_TO_INT(vector_sum(r.dir, r.origin)));
     vector head = vector_sum(r.dir, r.origin);
-    
+
     vector v1 = vector_normalize(r.dir);
     v1 = vector_set_module(v1, 20);
     double arg = vector_get_arg(v1);
@@ -35,28 +36,30 @@ void ray_draw(SDL_Renderer * renderer, ray r){
     arg += 45;
     v1 = vector_set_arg(v1, arg);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
-
 }
-void draw_arrow(SDL_Renderer * renderer, vector origin, vector head){
-    if(origin.x != head.x || origin.y != head.y){
+void draw_arrow(SDL_Renderer *renderer, vector origin, vector head)
+{
+    if (origin.x != head.x || origin.y != head.y)
+    {
         SDL_RenderDrawLine(renderer, VECTOR_TO_INT(origin), VECTOR_TO_INT(head));
         vector v1 = vector_normalize(vector_sub(head, origin));
         vector body = vector_sub(head, origin);
         double module = vector_get_module(body);
-        v1 = vector_set_module(v1, module/10);
+        v1 = vector_set_module(v1, module / 10);
         double arg = vector_get_arg(body);
         arg -= 135;
         v1 = vector_set_arg(v1, arg);
         SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
         v1 = vector_normalize(body);
-        v1 = vector_set_module(v1, module/10);
+        v1 = vector_set_module(v1, module / 10);
         arg = vector_get_arg(body);
         arg += 135;
         v1 = vector_set_arg(v1, arg);
         SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
     }
 }
-void draw_intersection(SDL_Renderer * renderer, intersection i){
+void draw_intersection(SDL_Renderer *renderer, intersection i)
+{
     switch (i.type)
     {
     case INTERSECTION_POINT:
@@ -66,6 +69,19 @@ void draw_intersection(SDL_Renderer * renderer, intersection i){
     case INTERSECTION_SEGMENT:
         draw_circle(renderer, VECTOR_TO_INT(i.s.p1), 5);
         draw_circle(renderer, VECTOR_TO_INT(i.s.p2), 5);
+        break;
+    default:
+        break;
+    }
+}
+
+void draw_raycast_hit(SDL_Renderer *renderer, raycast_hit i)
+{
+    switch (i.type)
+    {
+    case INTERSECTION_POINT:
+        draw_circle(renderer, VECTOR_TO_INT(i.p), 5);
+        draw_arrow(renderer, i.p, vector_sum(i.p, i.normal));
         break;
     default:
         break;
