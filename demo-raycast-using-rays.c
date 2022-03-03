@@ -71,21 +71,6 @@ int main()
             raycast_hit hit = raycast_segment(r, seg[i]);
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
             draw_raycast_hit(renderer, hit);
-            if (hit.type)
-            {
-          
-                vector ricochet = vector_set_module(r.dir, 20);
-                double ricochet_arg;
-                double normal_arg = vector_get_positive_arg(hit.normal);
-                double incoming_arg =  vector_get_positive_arg(vector_sub(vector_zero(), r.dir));
-                ricochet_arg =  (normal_arg - incoming_arg) +normal_arg;
-                ricochet  = vector_set_arg(ricochet, ricochet_arg);
-
-                //ricochet = vector_set_module(r.dir, 30);
-                vector head = vector_sum(hit.p, ricochet);
-                SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
-                draw_arrow(renderer, hit.p, head);
-            }
         }
         SDL_RenderPresent(renderer);
         // Get the next event

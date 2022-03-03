@@ -62,6 +62,9 @@ typedef struct
     char type;
     vector p;
     vector normal;
+    vector incident;
+    vector reflected;
+    double distance;
 } raycast_hit;
 
 /* All these methods are used to deal with vector structs. */

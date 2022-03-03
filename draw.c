@@ -81,7 +81,11 @@ void draw_raycast_hit(SDL_Renderer *renderer, raycast_hit i)
     {
     case INTERSECTION_POINT:
         draw_circle(renderer, VECTOR_TO_INT(i.p), 5);
-        draw_arrow(renderer, i.p, vector_sum(i.p, i.normal));
+
+        draw_arrow(renderer, i.p, vector_sum(i.p, vector_set_module(i.normal, 30)));
+        vector head = vector_sum(i.p, vector_set_module(i.reflected, 20));
+        SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
+        draw_arrow(renderer, i.p, head);
         break;
     default:
         break;
