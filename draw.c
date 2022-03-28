@@ -22,19 +22,25 @@ void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
 
 void ray_draw(SDL_Renderer *renderer, ray r)
 {
+
+    if (r.range != 0)
+        r.dir = vector_set_module(r.dir, r.range);
+    else
+        r.dir = vector_set_module(r.dir, 20);
+
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(r.origin), VECTOR_TO_INT(vector_sum(r.dir, r.origin)));
     vector head = vector_sum(r.dir, r.origin);
 
-    vector v1 = vector_normalize(r.dir);
-    v1 = vector_set_module(v1, 20);
+    vector v1 = r.dir;
     double arg = vector_get_arg(v1);
-    arg -= 45;
+    arg -= 45 + 90;
     v1 = vector_set_arg(v1, arg);
+    v1 = vector_set_module(v1, 15);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
-    v1 = vector_normalize(r.dir);
-    v1 = vector_set_module(v1, 20);
+    v1 = r.dir;
+    v1 = vector_set_module(v1, 15);
     arg = vector_get_arg(v1);
-    arg += 45;
+    arg += 45 + 90;
     v1 = vector_set_arg(v1, arg);
     SDL_RenderDrawLine(renderer, VECTOR_TO_INT(head), VECTOR_TO_INT(vector_sum(head, v1)));
 }
@@ -65,7 +71,7 @@ void draw_intersection(SDL_Renderer *renderer, intersection i)
     {
     case INTERSECTION_POINT:
         draw_circle(renderer, VECTOR_TO_INT(i.p), 5);
-        //draw_arrow(renderer, i.p, vector_sum(i.p, i.normal));
+        // draw_arrow(renderer, i.p, vector_sum(i.p, i.normal));
         break;
     case INTERSECTION_SEGMENT:
         draw_circle(renderer, VECTOR_TO_INT(i.s.p1), 5);
@@ -92,8 +98,10 @@ void draw_raycast_hit(SDL_Renderer *renderer, raycast_hit i)
         break;
     }
 }
-void triangle_draw(SDL_Renderer * renderer, triangle * t){
-    for(int i = 0; i < 3; i++){
+void triangle_draw(SDL_Renderer *renderer, triangle *t)
+{
+    for (int i = 0; i < 3; i++)
+    {
         segment s = triangle_get_segment_at(t, i);
         SEGMENT_DRAW(s);
     }

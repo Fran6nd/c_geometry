@@ -31,6 +31,6 @@ int ray_contain_point(ray r, vector p)
 
 ray ray_set_arg(ray r, double arg)
 {
-    vector_set_arg(r.dir, arg);
+    r.dir = vector_set_arg(r.dir, arg);
     return r;
 }

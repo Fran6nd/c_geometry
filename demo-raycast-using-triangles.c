@@ -39,7 +39,7 @@ int main()
      //   {.points = {{50,50}, {150,150}, {150,50}}},
     };
     double theta = 25;
-    vector vct = vector_new(0, 1000);
+    ray r = ray_new(center, vector_new(50, 0), 150);
     int paused = 0;
     while (1)
     {
@@ -50,12 +50,13 @@ int main()
         }
 
         //theta = 90;
-        vct = vector_set_arg(vct, theta);
+        r = ray_set_arg(r, theta);
         // Break out of the loop on quit
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
-        SEGMENT_DRAW(SEGMENT_FROM_VECT(center, vct));
+        ray_draw(renderer, r);
+        //SEGMENT_DRAW(SEGMENT_FROM_VECT(center, vct));
 
         //VECTOR_DRAW(center, vector_new(25, 25));
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
@@ -65,8 +66,7 @@ int main()
         }
         for (int i = 0; i < sizeof(tri) / sizeof(tri[0]); i++)
         {
-            ray s = ray_new(center, vct, 100);
-            raycast_hit si = raycast_triangle(&s, &tri[i] );
+            raycast_hit si = raycast_triangle(&r, &tri[i] );
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
             draw_raycast_hit(renderer, si);
 
