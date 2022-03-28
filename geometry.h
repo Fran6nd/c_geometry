@@ -118,7 +118,7 @@ intersection segment_intersect(segment *ray, segment *seg);
 
 ray ray_new(vector origin, vector dir, double range);
 int ray_contain_point(ray r, vector p);
-ray ray_set_arg(ray r, double arg)
+ray ray_set_arg(ray r, double arg);
 
 /* Here are the triangle stuff. */
 
