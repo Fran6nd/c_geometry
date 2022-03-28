@@ -118,20 +118,24 @@ intersection segment_intersect(segment *ray, segment *seg);
 
 ray ray_new(vector origin, vector dir, double range);
 int ray_contain_point(ray r, vector p);
+ray ray_set_arg(ray r, double arg)
 
 /* Here are the triangle stuff. */
+
 triangle triangle_new(vector p1, vector p2, vector p3);
 int triangle_contain_point(triangle *t, vector p);
 /* Get segment 0, 1 or 2. */
 segment triangle_get_segment_at(triangle *t, int n);
 
-/* About getting intersections and raycasting. */
+/* About getting intersections. */
+
 intersection line_intersect_line(line *l1, line *l2);
 intersection line_intersect_segment(line *l, segment *s);
 #define segment_intersect_line(s, l) line_intersect_segment(l, s);
 intersection ray_intersect_segment(ray *r, segment *s);
 
 /* About raycasting stuff. */
+
 raycast_hit raycast_segment(ray r, segment s);
 raycast_hit raycast_triangle(ray * r, triangle * t);
 

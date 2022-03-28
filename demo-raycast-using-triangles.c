@@ -65,7 +65,7 @@ int main()
         }
         for (int i = 0; i < sizeof(tri) / sizeof(tri[0]); i++)
         {
-            ray s = ray_new(center, vct, 0);
+            ray s = ray_new(center, vct, 100);
             raycast_hit si = raycast_triangle(&s, &tri[i] );
             SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
             draw_raycast_hit(renderer, si);
