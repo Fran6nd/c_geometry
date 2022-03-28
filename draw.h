@@ -15,5 +15,6 @@ void ray_draw(SDL_Renderer * renderer, ray r);
 void draw_arrow(SDL_Renderer * renderer, vector origin, vector head);
 void draw_intersection(SDL_Renderer * renderer, intersection i);
 void draw_raycast_hit(SDL_Renderer * renderer, raycast_hit i);
+void triangle_draw(SDL_Renderer * renderer, triangle * t);
 
 #endif

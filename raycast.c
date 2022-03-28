@@ -52,3 +52,28 @@ raycast_hit raycast_segment(ray r, segment s)
     }
     return hit;
 }
+
+raycast_hit raycast_triangle(ray * r, triangle * t){
+    raycast_hit output;
+    int found = 0;
+    for(int i = 0; i < 3; i++){
+        segment s = triangle_get_segment_at(t, i);
+        raycast_hit tmp = raycast_segment(*r, s);
+        if(tmp.type == RAYCAST_POINT){
+            if (found == 1){
+                if(vector_get_module( vector_sub(r->origin, tmp.p)) < vector_get_module( vector_sub(r->origin, output.p))){
+                    output = tmp;
+                }
+            }
+            else{
+                output = tmp;
+            }
+            found = 1;
+        }
+
+    }
+    if(found == 0){
+        output.type = RAYCAST_NONE;
+    }
+    return output;
+}

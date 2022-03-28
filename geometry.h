@@ -44,6 +44,10 @@ typedef struct
     vector p1, p2;
 } segment;
 
+typedef struct{
+    vector points[3];
+} triangle;
+
 /* The difference between intersection and raycast_hit is that a raycast_hit can return only the closest point found, and a normal vector to the hitten segment. */
 
 typedef struct
@@ -115,6 +119,12 @@ intersection segment_intersect(segment *ray, segment *seg);
 ray ray_new(vector origin, vector dir, double range);
 int ray_contain_point(ray r, vector p);
 
+/* Here are the triangle stuff. */
+triangle triangle_new(vector p1, vector p2, vector p3);
+int triangle_contain_point(triangle *t, vector p);
+/* Get segment 0, 1 or 2. */
+segment triangle_get_segment_at(triangle *t, int n);
+
 /* About getting intersections and raycasting. */
 intersection line_intersect_line(line *l1, line *l2);
 intersection line_intersect_segment(line *l, segment *s);
@@ -123,5 +133,6 @@ intersection ray_intersect_segment(ray *r, segment *s);
 
 /* About raycasting stuff. */
 raycast_hit raycast_segment(ray r, segment s);
+raycast_hit raycast_triangle(ray * r, triangle * t);
 
 #endif

@@ -16,3 +16,7 @@ demo-raycast-using-segments:
 	gcc demo-raycast-using-segments.c -o tmp-demo line.c vector.c segment.c ray.c draw.c intersection.c  $(SDL2_INCLUDE)
 	./tmp-demo
 	rm tmp-demo
+demo-raycast-using-triangles:
+	gcc demo-raycast-using-triangles.c -o tmp-demo line.c raycast.c vector.c segment.c ray.c draw.c intersection.c triangle.c  $(SDL2_INCLUDE)
+	./tmp-demo
+	rm tmp-demo

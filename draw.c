@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include "draw.h"
+#include "geometry.h"
 
 void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
 {
@@ -89,5 +90,11 @@ void draw_raycast_hit(SDL_Renderer *renderer, raycast_hit i)
         break;
     default:
         break;
+    }
+}
+void triangle_draw(SDL_Renderer * renderer, triangle * t){
+    for(int i = 0; i < 3; i++){
+        segment s = triangle_get_segment_at(t, i);
+        SEGMENT_DRAW(s);
     }
 }
