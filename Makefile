@@ -9,7 +9,7 @@ test:
 	./tmp-test
 	rm tmp-test
 demo-raycast-using-rays:
-	gcc demo-raycast-using-rays.c -o tmp-demo line.c vector.c segment.c ray.c draw.c intersection.c raycast.c  $(SDL2_INCLUDE)
+	gcc demo-raycast-using-rays.c -o tmp-demo line.c vector.c segment.c triangle.c ray.c draw.c intersection.c raycast.c  $(SDL2_INCLUDE)
 	./tmp-demo
 	rm tmp-demo
 demo-raycast-using-segments:
