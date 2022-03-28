@@ -34,7 +34,7 @@ int main()
         {.points = {{300,300}, {400,400}, {300,400}}},
         {.points = {{25,300}, {60,400}, {25,400}}},
         {.points = {{center.x + 30,center.y + 30},{center.x + 90,center.y + 90},{center.x + 30,center.y + 90}}},
-        
+        {.points = {{center.x ,center.y + 30},{center.x - 30,center.y -30},{center.x + 30,center.y -30}}},
      //   {.points = {{50,50}, {150,150}, {150,50}}},
      //   {.points = {{50,50}, {150,150}, {150,50}}},
     };

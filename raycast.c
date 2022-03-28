@@ -37,7 +37,8 @@ raycast_hit raycast_segment(ray r, segment s)
             return hit;
         }
     }
-    /* If both points of the segment are contained in the ray and both are different from the origin. */
+    /* If both points of the segment are contained in the ray and both are different from the origin. The ray is colinear with the targeted segment.*/
+    /* DISABLED
     else if (in.type == INTERSECTION_SEGMENT && ray_contain_point(r, in.s.p1) && ray_contain_point(r, in.s.p2) && !vector_eq(r.origin, in.s.p1) && !vector_eq(r.origin, in.s.p2))
     {
         hit.p = vector_get_closest_to(r.origin, in.s.p1, in.s.p2);
@@ -46,6 +47,7 @@ raycast_hit raycast_segment(ray r, segment s)
         hit.type = RAYCAST_POINT;
         return hit;
     }
+    */
     else
     {
         hit.type = RAYCAST_NONE;
@@ -53,26 +55,33 @@ raycast_hit raycast_segment(ray r, segment s)
     return hit;
 }
 
-raycast_hit raycast_triangle(ray * r, triangle * t){
+raycast_hit raycast_triangle(ray *r, triangle *t)
+{
     raycast_hit output;
     int found = 0;
-    for(int i = 0; i < 3; i++){
-        segment s = triangle_get_segment_at(t, i);
-        raycast_hit tmp = raycast_segment(*r, s);
-        if(tmp.type == RAYCAST_POINT){
-            if (found == 1){
-                if(vector_get_module( vector_sub(r->origin, tmp.p)) < vector_get_module( vector_sub(r->origin, output.p))){
+    if (!triangle_contain_point(t, r->origin))
+        for (int i = 0; i < 3; i++)
+        {
+            segment s = triangle_get_segment_at(t, i);
+            raycast_hit tmp = raycast_segment(*r, s);
+            if (tmp.type == RAYCAST_POINT)
+            {
+                if (found == 1)
+                {
+                    if (vector_get_module(vector_sub(r->origin, tmp.p)) < vector_get_module(vector_sub(r->origin, output.p)))
+                    {
+                        output = tmp;
+                    }
+                }
+                else
+                {
                     output = tmp;
                 }
+                found = 1;
             }
-            else{
-                output = tmp;
-            }
-            found = 1;
         }
-
-    }
-    if(found == 0){
+    if (found == 0)
+    {
         output.type = RAYCAST_NONE;
     }
     return output;
