@@ -48,6 +48,10 @@ typedef struct{
     vector points[3];
 } triangle;
 
+typedef struct{
+    triangle half[2];
+} quad;
+
 /* The difference between intersection and raycast_hit is that a raycast_hit can return only the closest point found, and a normal vector to the hitten segment. */
 
 typedef struct
@@ -126,6 +130,11 @@ triangle triangle_new(vector p1, vector p2, vector p3);
 int triangle_contain_point(triangle *t, vector p);
 /* Get segment 0, 1 or 2. */
 segment triangle_get_segment_at(triangle *t, int n);
+
+/* Here are the quad stuff. */
+
+quad quad_new(vector p1, vector p2, vector p3, vector p4);
+int quad_contain_point(quad *q, vector p);
 
 /* About getting intersections. */
 

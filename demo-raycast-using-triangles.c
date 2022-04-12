@@ -14,19 +14,22 @@ int main()
     SDL_Window *screen = SDL_CreateWindow("My application",
                                           SDL_WINDOWPOS_UNDEFINED,
                                           SDL_WINDOWPOS_UNDEFINED,
-                                          640, 480,
+                                          1000, 1000,
                                           0);
     if (!screen)
     {
         fprintf(stderr, "Could not create window\n");
         return 1;
     }
+    
     SDL_Renderer *renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_SOFTWARE);
     if (!renderer)
     {
         fprintf(stderr, "Could not create renderer\n");
         return 1;
     }
+    /* Interesting. */
+    //SDL_RenderSetLogicalSize(renderer, 320, 240);
 
     vector center = vector_new(320, 240);
     triangle tri[] = {
@@ -39,7 +42,7 @@ int main()
      //   {.points = {{50,50}, {150,150}, {150,50}}},
     };
     double theta = 25;
-    ray r = ray_new(center, vector_new(50, 0), 150);
+    ray r = ray_new(center, vector_new(50, 0), 250);
     int paused = 0;
     while (1)
     {
