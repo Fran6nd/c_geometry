@@ -2,7 +2,7 @@
 #define DRAW_H
 #include <SDL2/SDL.h>
 
-#include "geometry.h"
+#include "c_geometry.h"
 
 
 #define VECTOR_TO_INT(VECT) (int)VECT.x, (int)VECT.y

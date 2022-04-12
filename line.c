@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include "geometry.h"
+#include "c_geometry.h"
 
 line line_new_from_segment(segment *s)
 {

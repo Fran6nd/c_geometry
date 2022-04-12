@@ -1,4 +1,4 @@
-#include "geometry.h"
+#include "c_geometry.h"
 #include "stdlib.h"
 
 intersection line_intersect_segment(line *l, segment *s)

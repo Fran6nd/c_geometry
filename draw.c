@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include "draw.h"
-#include "geometry.h"
+#include "c_geometry.h"
 
 void draw_circle(SDL_Renderer *renderer, int x, int y, int radius)
 {

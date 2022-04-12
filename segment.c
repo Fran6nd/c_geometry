@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "geometry.h"
+#include "c_geometry.h"
 
 segment segment_new(vector p1, vector p2)
 {

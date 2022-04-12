@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "geometry.h"
+#include "c_geometry.h"
 #include "draw.h"
 #include <unistd.h>
 

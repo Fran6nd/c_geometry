@@ -1,5 +1,5 @@
 #include <math.h>
-#include "geometry.h"
+#include "c_geometry.h"
 
 #define PI 3.14159265358979323846264338327950288
 vector vector_new(double x, double y)

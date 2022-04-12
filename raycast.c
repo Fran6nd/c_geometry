@@ -1,4 +1,4 @@
-#include "geometry.h"
+#include "c_geometry.h"
 
 raycast_hit raycast_segment(ray r, segment s)
 {

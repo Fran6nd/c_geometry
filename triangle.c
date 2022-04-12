@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "geometry.h"
+#include "c_geometry.h"
 
 triangle triangle_new(vector p1, vector p2, vector p3)
 {
