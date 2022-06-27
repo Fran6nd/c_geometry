@@ -4,6 +4,27 @@
 #define ACCURACY 100
 #define ALMOST_EQ(a, b) ((a * ACCURACY - b * ACCURACY) * (a * ACCURACY - b * ACCURACY)) < ACCURACY
 
+/*
+Line types:
+    linear
+    vertical
+    horizontal
+*/
+
+#define LINE_TYPE_LIN 0
+#define LINE_TYPE_VERT 1
+#define LINE_TYPE_HORIZON 3
+#define LINE_TYPE_NULL 4
+
+/*
+Intersection types:
+    none: no intersection.
+    point: the intersection is one single point.
+    segment: the intersection is segment. Can be an intersection between two segments, two rays (half line), or between a segment and a line/ray.
+    line: the intersection is basically the result of the intersection of two lines with the same exact equation.
+    ray: It can be an intersection between a line and a ray or between two rays.
+*/
+
 #define INTERSECTION_POINT 1
 #define INTERSECTION_NONE 0
 /* Means that the intersection is a segment itself. */
@@ -13,13 +34,15 @@
 /* Means that the intersection is an half line (ray) itself. */
 #define INTERSECTION_RAY -3
 
+/*
+Raycast types:
+    none: no result.
+    point: we hit something.
+ACHTUNG! For now we support only one point as the result. The raycast does not go through to see if it hits another thing.
+*/
+
 #define RAYCAST_NONE 0
 #define RAYCAST_POINT 1
-
-#define LINE_TYPE_LIN 0
-#define LINE_TYPE_VERT 1
-#define LINE_TYPE_HORIZON 3
-#define LINE_TYPE_NULL 4
 
 typedef struct
 {
