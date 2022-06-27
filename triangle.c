@@ -7,9 +7,6 @@ triangle triangle_new(vector p1, vector p2, vector p3)
     tr.points[0] = p1;
     tr.points[1] = p2;
     tr.points[2] = p3;
-    tr.points[0] = p1;
-    tr.points[1] = p2;
-    tr.points[2] = p3;
     return tr;
 }
 
