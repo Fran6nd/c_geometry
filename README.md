@@ -14,3 +14,4 @@ For now it shows how we can perform raycasts and other things with the lib.
 * Use less `#define`
 * Add optimization?
 * Use triangles to create a polygon object by intersecting triangles.
+* Add the capability to move/rotate triangles.
